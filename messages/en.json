@@ -1,0 +1,385 @@
+{
+  "Meta": {
+    "name": "Mohamed Ali",
+    "title": "Mohamed Ali — Senior Full-Stack Engineer | Next.js & ASP.NET Core",
+    "description": "Senior Full-Stack Engineer (Next.js & ASP.NET Core) based in Egypt. 20+ professional, SEO-driven, Arabic-first websites delivered for doctors and businesses — each with a dashboard you can edit yourself.",
+    "keywords": [
+      "Full-Stack Developer",
+      "Next.js Developer",
+      "ASP.NET Core Developer",
+      "Website developer Egypt",
+      "Doctor website design",
+      "Supabase",
+      "Technical SEO",
+      "Core Web Vitals",
+      "Arabic RTL website",
+      "Freelance web developer"
+    ],
+    "role": "Senior Full-Stack Engineer"
+  },
+  "Nav": {
+    "skip": "Skip to content",
+    "name": "Mohamed Ali",
+    "role": "Full-Stack Engineer",
+    "home": "Mohamed Ali — back to top",
+    "primary": "Primary",
+    "projects": "Projects",
+    "testimonials": "Clients",
+    "services": "Services",
+    "about": "About",
+    "skills": "Skills",
+    "process": "Process",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "hire": "Start a project",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language"
+  },
+  "WhatsApp": {
+    "label": "Chat on WhatsApp",
+    "message": "Hi Mohamed, I'd like to ask about a website."
+  },
+  "Hero": {
+    "available": "Available for new projects",
+    "title": "Building <hl>high-performance</hl>, <nb>SEO-driven</nb> <nb>full-stack</nb> web apps that scale.",
+    "subtitle": "I'm Mohamed Ali, a Senior Full-Stack Engineer (.NET & Next.js) based in Egypt. I've delivered 20+ websites for doctors and businesses — professional, Arabic-first sites that show up on Google, come with a dashboard you edit yourself, and turn visitors into bookings and clients.",
+    "ctaPrimary": "Start a project",
+    "ctaSecondary": "View projects",
+    "whatsapp": "Or message me directly on WhatsApp",
+    "stackLabel": "Core stack",
+    "auditLabel": "Lighthouse target for every new build",
+    "scores": {
+      "performance": "Performance",
+      "accessibility": "Accessibility",
+      "bestPractices": "Best Practices",
+      "seo": "SEO"
+    }
+  },
+  "Metrics": {
+    "label": "Impact at a glance",
+    "performance": {
+      "label": "Lighthouse target",
+      "detail": "The bar every new build aims for"
+    },
+    "rendering": {
+      "value": "SSR + SSG",
+      "label": "SEO-optimized rendering",
+      "detail": "Pre-rendered pages Google crawls instantly"
+    },
+    "projects": {
+      "label": "Websites delivered",
+      "detail": "For doctors, clinics and businesses"
+    },
+    "i18n": {
+      "value": "AR ⇄ EN",
+      "label": "Bilingual by default",
+      "detail": "Arabic-first RTL with seamless LTR"
+    }
+  },
+  "Projects": {
+    "eyebrow": "Selected work",
+    "title": "Production sites built to rank — and to convert",
+    "subtitle": "Live client sites, each with a Supabase-powered dashboard and a complete technical SEO setup.",
+    "liveBadge": "Live site",
+    "caseStudy": "How it was built",
+    "tagsLabel": "Tech & features",
+    "live": "Live preview",
+    "liveLabel": "Live preview: {name} (opens in a new tab)",
+    "screenshotAlt": "Homepage of the {name} website",
+    "tags": {
+      "appRouter": "Next.js App Router",
+      "supabase": "Supabase CMS",
+      "seo": "SEO Optimized",
+      "rtl": "Arabic RTL/LTR"
+    },
+    "items": {
+      "samehKasem": {
+        "name": "Dr. Sameh Kasem",
+        "category": "Neurosurgery · Medical portal",
+        "summary": "An Arabic-first medical portal for a consultant in brain, nerve and spine surgery — designed to turn search traffic into booked consultations.",
+        "highlights": [
+          "Custom appointment booking forms",
+          "Multi-language routing (Arabic / English)",
+          "CMS dashboard for patient reviews and procedure updates"
+        ],
+        "caseStudy": "Both locales are statically generated with next-intl, so every page ships as pre-rendered HTML with hreflang alternates and localized metadata. Medical schema markup targets condition and procedure searches, while the clinic team manages reviews and procedures from a Supabase dashboard — no developer needed.",
+        "tag": "Booking flow"
+      },
+      "mohamedSamy": {
+        "name": "Dr. Mohamed Samy",
+        "category": "Gastroenterology & endoscopy · Medical hub",
+        "summary": "A media-rich hub for a gastroenterology, endoscopy and liver consultant, built around videos, articles and patient cases.",
+        "highlights": [
+          "Direct WhatsApp routing for instant patient inquiries",
+          "Video galleries and patient case studies",
+          "Dynamic CMS for medical articles and case studies"
+        ],
+        "caseStudy": "Articles and medical cases are managed in Supabase and published as statically rendered pages, each with its own metadata and Article structured data. The video gallery and one-tap WhatsApp routing keep patients a single tap away from the clinic.",
+        "tag": "Video gallery"
+      },
+      "mahmoudHassaan": {
+        "name": "Dr. Mahmoud Hassaan",
+        "category": "Surgical oncology · Landing experience",
+        "summary": "A high-conversion landing experience for a surgical oncology consultant, with a calm glassmorphism UI that builds trust from the first scroll.",
+        "highlights": [
+          "Conversion-focused layout with persistent booking CTAs",
+          "Custom glassmorphism UI design",
+          "Statically generated, search-ready pages"
+        ],
+        "caseStudy": "Every page is generated at build time and served from Vercel's edge network. The glass effects are pure CSS with no runtime UI library, fonts are self-hosted through next/font, and content updates flow in from Supabase.",
+        "tag": "Static generation"
+      },
+      "topPower": {
+        "name": "Top Power",
+        "category": "MEP & fire protection · Corporate platform",
+        "summary": "A full-featured corporate platform for an MEP engineering supplier, turning a fire-protection product catalog into a client-acquisition engine.",
+        "highlights": [
+          "Client-acquisition workflows with call and WhatsApp routing",
+          "CMS-driven product, catalog and blog modules",
+          "Lighthouse 100 in SEO, Accessibility & Best Practices"
+        ],
+        "caseStudy": "Products, catalog and blog are CMS-driven from Supabase and rendered as static pages with Product and Organization structured data, with responsive images served through Supabase image transformations.",
+        "tag": "Product catalog"
+      }
+    }
+  },
+  "Testimonials": {
+    "eyebrow": "Client feedback",
+    "title": "What clients say after launch",
+    "subtitle": "Doctors and business owners I've built for — every quote links to the live project.",
+    "viewProject": "View their website",
+    "items": {
+      "samehKasem": {
+        "quote": "Mohamed understood how our clinic works from the very first call. The site is well organised and looks professional, the booking form makes it easy for patients to reach us directly, and the dashboard is simple enough that I update patient reviews and procedures myself.",
+        "name": "Dr. Sameh Kasem",
+        "role": "Consultant in brain, nerve & spine surgery"
+      },
+      "mohamedSamy": {
+        "quote": "I had a lot of videos and articles and needed one organised place to present them. Now we add articles and cases ourselves from the dashboard, and the WhatsApp button made it much easier for patients to contact the clinic.",
+        "name": "Dr. Mohamed Samy",
+        "role": "Consultant in gastroenterology, endoscopy & hepatology"
+      },
+      "mahmoudHassaan": {
+        "quote": "I wanted a site that gives patients and their families a sense of calm and trust, and that's exactly what I got. The design is elegant, and communication was clear and organised from the first day until delivery.",
+        "name": "Dr. Mahmoud Hassaan",
+        "role": "Consultant surgical oncologist"
+      },
+      "topPower": {
+        "quote": "We needed a platform that presents our fire-fighting products professionally and brings in clients. Mohamed delivered a strong, professional website, and we update the catalog and blog ourselves from the dashboard without any hassle.",
+        "name": "Mahmoud El-Assal",
+        "role": "Owner, Top Power"
+      }
+    }
+  },
+  "Skills": {
+    "eyebrow": "Skills & architecture",
+    "title": "A full-stack toolkit tuned for speed",
+    "subtitle": "For tech leads and agencies: the stack, practices and architecture behind every build.",
+    "groups": {
+      "frontend": {
+        "title": "Frontend Excellence",
+        "description": "Fast, accessible interfaces with fluid motion and native bilingual layouts.",
+        "items": ["Next.js (App Router, Turbopack)", "React 19", "TypeScript", "Tailwind CSS", "Framer Motion", "next-intl"]
+      },
+      "backend": {
+        "title": "Backend Powerhouse",
+        "description": "Clean, scalable APIs and data layers built around real business workflows.",
+        "items": ["ASP.NET Core Web API", "C#", "Entity Framework Core", "SQL Server", "Supabase (Auth, Realtime, Storage)"]
+      },
+      "performance": {
+        "title": "Performance & SEO",
+        "description": "Technical foundations that make pages load instantly and rank higher.",
+        "items": ["Core Web Vitals tuning", "Schema.org markup", "OpenGraph metadata", "Static site exporting", "SSR & SSG", "hreflang & sitemaps"]
+      },
+      "architecture": {
+        "title": "Architecture",
+        "description": "Maintainable systems designed to grow with the business.",
+        "items": ["Clean Architecture", "Microservices", "RESTful APIs", "Headless CMS integration", "Dynamic CMS backends"]
+      }
+    },
+    "flow": {
+      "title": "How a typical build fits together",
+      "client": {
+        "title": "Next.js frontend",
+        "detail": "SSG / SSR pages, next-intl routing, edge-cached on Vercel"
+      },
+      "api": {
+        "title": "API layer",
+        "detail": "ASP.NET Core Web API or Supabase, following Clean Architecture"
+      },
+      "data": {
+        "title": "Data & CMS",
+        "detail": "SQL Server or Postgres, plus Supabase Auth, Storage & Realtime"
+      }
+    }
+  },
+  "Services": {
+    "eyebrow": "Services",
+    "title": "Solutions built around your business goals",
+    "subtitle": "From a single high-converting landing page to a full CMS-driven platform — scoped, built and launched end to end.",
+    "items": {
+      "fullstack": {
+        "title": "Custom Full\u2011Stack Web Apps",
+        "description": "A system built around how your business actually runs — bookings, orders, dashboards and roles — on Next.js with ASP.NET Core or Supabase, ready to grow with you.",
+        "points": ["Clean Architecture REST APIs", "Authentication, roles and dashboards", "Production deployment & handover"]
+      },
+      "cms": {
+        "title": "High-Performance CMS Integration",
+        "description": "Edit text, images and articles yourself from a simple dashboard — no developer needed.",
+        "points": ["Custom admin dashboard", "Media managed in Supabase Storage", "Content updates without redeploys"]
+      },
+      "seo": {
+        "title": "Conversion-Focused, SEO-Driven Websites",
+        "description": "A website your customers find on Google, built to turn them into calls, bookings and WhatsApp messages.",
+        "points": ["Speed & Core Web Vitals optimisation", "Schema markup & OpenGraph", "Clear CTAs and WhatsApp routing"]
+      },
+      "i18n": {
+        "title": "Arabic / English Localization",
+        "description": "One site in Arabic and English, pixel-perfect in both directions, so you reach clients at home and abroad.",
+        "points": ["next-intl locale routing", "RTL/LTR-aware components", "hreflang & localized metadata"]
+      }
+    },
+    "ctaNote": "Not sure which fits? Tell me the goal and I'll suggest the leanest path.",
+    "cta": "Discuss your project"
+  },
+  "About": {
+    "eyebrow": "About",
+    "title": "One developer, accountable for your project from first call to launch",
+    "bio": [
+      "I'm Mohamed Ali, a full-stack engineer working across the .NET and Next.js ecosystems. Twenty-plus websites in, I've learned that clients don't buy frameworks — they buy more bookings, more inquiries and less hassle.",
+      "So every site I ship is built mobile-first, set up properly for Google from day one, and comes with a dashboard simple enough to update without calling a developer. You work with one person who designs, builds, launches and supports it — and who answers on WhatsApp."
+    ],
+    "location": "Based in Egypt · working remotely",
+    "available": "Taking new projects",
+    "websites": "Websites delivered",
+    "languages": "Arabic & English",
+    "principlesTitle": "What working with me looks like",
+    "principles": [
+      "You deal with me directly — no middlemen or account managers",
+      "A live preview link so you watch the site take shape",
+      "Your domain, hosting and code stay 100% yours",
+      "Dashboard training and support after launch"
+    ],
+    "niche": {
+      "title": "Specialised in websites for doctors & clinics",
+      "description": "Three of the four featured projects are for consultant doctors — I know what patients look for before they book.",
+      "points": [
+        "Appointment booking and direct WhatsApp routing",
+        "Patient reviews and cases managed from the dashboard",
+        "Medical articles that bring in Google traffic",
+        "Video galleries and patient education content"
+      ]
+    }
+  },
+  "Process": {
+    "eyebrow": "Process",
+    "title": "A clear path from first call to launch",
+    "subtitle": "No surprises: at every step you know what happens next, when, and what you receive.",
+    "steps": {
+      "call": {
+        "title": "Discovery call",
+        "description": "We talk through your goals, audience and must-haves. You get a written quote and timeline before anything starts."
+      },
+      "plan": {
+        "title": "Plan & design",
+        "description": "Page structure, content and interface design in Arabic and English — agreed before a line of code is written."
+      },
+      "build": {
+        "title": "Build with live preview",
+        "description": "Watch the site come together on a private preview link; your feedback is applied as we go."
+      },
+      "launch": {
+        "title": "Launch",
+        "description": "Domain connected, SEO configured, site submitted to Google Search Console and speed-tested before handover."
+      },
+      "support": {
+        "title": "Training & support",
+        "description": "A walkthrough of your dashboard so you can edit content yourself, plus support after launch."
+      }
+    }
+  },
+  "Faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions clients usually ask",
+    "items": {
+      "edit": {
+        "q": "Can I update the content myself?",
+        "a": "Yes. Every project includes a dashboard where you edit text, images, articles, reviews or products — no code and no developer needed."
+      },
+      "own": {
+        "q": "Will I own the website?",
+        "a": "Completely. The domain, hosting and source code are set up under your own accounts, so you're never locked in."
+      },
+      "time": {
+        "q": "How long does it take?",
+        "a": "It depends on scope: a focused landing page usually takes 1–2 weeks, and a full website with a dashboard 3–5 weeks. You get an exact timeline together with the quote."
+      },
+      "cost": {
+        "q": "How much does a website cost?",
+        "a": "Pricing depends on the number of pages and features. After a short call you receive a clear written quote — no hidden costs."
+      },
+      "google": {
+        "q": "Will my site show up on Google?",
+        "a": "Every site ships with technical SEO done right: speed optimisation, structured data, sitemaps and Search Console setup. Rankings also depend on competition and content, and I'll tell you honestly what to expect."
+      },
+      "after": {
+        "q": "What happens after launch?",
+        "a": "You get support after launch for fixes and small adjustments, and I'm available for new features or ongoing maintenance whenever you need them."
+      }
+    }
+  },
+  "Contact": {
+    "eyebrow": "Contact",
+    "title": "Have a project in mind? Let's make it fast.",
+    "subtitle": "Tell me about your goals, timeline and budget, and I'll get back to you with clear next steps.",
+    "whatsappLabel": "Fastest reply",
+    "whatsappCta": "Chat on WhatsApp",
+    "emailLabel": "Or email me",
+    "copy": "Copy email",
+    "copied": "Copied",
+    "elsewhere": "Find me on",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "service": "What do you need?",
+      "message": "Project details",
+      "messagePlaceholder": "Goals, timeline, budget, links…",
+      "submit": "Send message",
+      "submitWhatsapp": "Send via WhatsApp",
+      "submitEmail": "Send via email",
+      "sending": "Sending…",
+      "options": {
+        "fullstack": "Full-stack web app",
+        "cms": "CMS integration",
+        "seo": "Business website & SEO",
+        "i18n": "Arabic / English localization",
+        "other": "Something else"
+      },
+      "sent": "Thanks — your message is on its way. I'll be in touch soon.",
+      "whatsapp": "WhatsApp opened with your message ready — just hit send.",
+      "mailto": "Your email app should open with the message ready to send.",
+      "fallback": "The form couldn't send, so WhatsApp opened with your message instead.",
+      "note": "No spam, no newsletters — just a reply from me."
+    },
+    "mail": {
+      "subject": "New project inquiry from {name}",
+      "intro": "Hi Mohamed, I have a new project:",
+      "from": "From",
+      "service": "Service"
+    }
+  },
+  "Footer": {
+    "tagline": "High-performance, SEO-driven full-stack web apps — Arabic first.",
+    "rights": "© {year} Mohamed Ali. All rights reserved.",
+    "built": "Built with Next.js, Tailwind CSS & Framer Motion.",
+    "top": "Back to top"
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "body": "The page you're looking for doesn't exist or has moved.",
+    "home": "Back to home"
+  }
+}

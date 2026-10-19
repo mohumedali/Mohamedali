@@ -1,0 +1,358 @@
+@import "tailwindcss";
+
+@theme {
+  /* Surfaces — #0e1418 is the page base */
+  --color-ink-950: #090e11;
+  --color-ink-900: #0e1418;
+  --color-ink-850: #111a1f;
+  --color-ink-800: #152027;
+  --color-ink-700: #1d2b33;
+
+  /* Text */
+  --color-mist-50: #f2f8f7;
+  --color-mist-100: #e3eeec;
+  --color-mist-200: #c7d6d6;
+  --color-mist-300: #a8bbbd;
+  --color-mist-400: #8599a0;
+  --color-mist-500: #74888f; /* ≥4.5:1 on ink-900 and on glass cards */
+
+  /* Glow accents */
+  --color-glow-green: #34d399;
+  --color-glow-teal: #2dd4bf;
+  --color-glow-cyan: #22d3ee;
+  --color-glow-sky: #7dd3fc;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* CSS-driven entrance for above-the-fold content: runs before hydration.
+     `lift` moves without fading — Chrome skips text first painted at opacity 0 as an LCP candidate,
+     so the headline and subtitle must be visible from their very first paint. */
+  --animate-rise: rise 0.8s var(--ease-out-expo) both;
+  --animate-lift: lift 0.8s var(--ease-out-expo) both;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-gauge: gauge 1.8s var(--ease-out-expo) both;
+  --animate-ping-soft: ping-soft 2s ease-out infinite;
+  --animate-ring: ring 2.4s ease-out infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes lift {
+    from {
+      transform: translateY(14px);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes gauge {
+    from {
+      stroke-dashoffset: 100;
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+  @keyframes ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    70%,
+    100% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+  }
+}
+
+/* Arabic pages: Readex Pro carries both Arabic and Latin glyphs, so mixed lines share one rhythm. */
+:root:lang(ar) {
+  --font-sans: var(--font-readex), var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-mist-100);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(45 212 191 / 0.3);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-glow-teal);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------- Scroll reveal (driven by <RevealTracker>) ---------- */
+
+@layer components {
+  [data-reveal] {
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+
+  /* Hidden only once JS is running, so no-JS visitors and crawlers always see the content. */
+  .reveal-ready [data-reveal]:not([data-inview]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  [data-stagger] > [data-reveal]:nth-child(2) { --reveal-delay: calc(var(--stagger) * 1); }
+  [data-stagger] > [data-reveal]:nth-child(3) { --reveal-delay: calc(var(--stagger) * 2); }
+  [data-stagger] > [data-reveal]:nth-child(4) { --reveal-delay: calc(var(--stagger) * 3); }
+  [data-stagger] > [data-reveal]:nth-child(5) { --reveal-delay: calc(var(--stagger) * 4); }
+  [data-stagger] > [data-reveal]:nth-child(6) { --reveal-delay: calc(var(--stagger) * 5); }
+}
+
+/* ---------- Layout ---------- */
+
+@utility shell {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Below-the-fold sections: skip their layout and paint until they approach the viewport.
+   `auto` in the intrinsic size remembers the real height once rendered, so anchors stay accurate. */
+@utility defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+/* ---------- Liquid glass ----------
+   `glass` is a cheap tinted panel (no blur) for cards on the flat page background.
+   `glass-blur` adds backdrop-filter and is reserved for surfaces that float over content. */
+
+@utility glass {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.015));
+  border: 1px solid rgb(255 255 255 / 0.08);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.06),
+    0 24px 60px -32px rgb(0 0 0 / 0.7);
+}
+
+@utility glass-blur {
+  background-color: rgb(14 20 24 / 0.62);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.08),
+    0 20px 50px -24px rgb(0 0 0 / 0.65);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-glow-green) 0%,
+    var(--color-glow-teal) 40%,
+    var(--color-glow-cyan) 75%,
+    var(--color-glow-sky) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Cursor-following glow + gradient edge. Coordinates come from the page-level <SpotlightTracker>. */
+@utility spotlight {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  &::before {
+    background: radial-gradient(
+      26rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+      rgb(45 212 191 / 0.09),
+      transparent 45%
+    );
+  }
+  &::after {
+    padding: 1px;
+    background: radial-gradient(
+      20rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
+      rgb(45 212 191 / 0.55),
+      transparent 50%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  &:hover::before,
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.8rem 1.4rem;
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    box-shadow 0.3s,
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+
+  &:active {
+    transform: translateY(1px) scale(0.99);
+  }
+  &:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+}
+
+@utility btn-primary {
+  color: var(--color-ink-950);
+  background-image: linear-gradient(100deg, var(--color-glow-green), var(--color-glow-cyan));
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.15),
+    0 10px 30px -10px rgb(45 212 191 / 0.55);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.25),
+      0 16px 40px -8px rgb(45 212 191 / 0.7);
+  }
+}
+
+@utility btn-whatsapp {
+  color: #04140a;
+  background-color: #25d366;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.2),
+    0 10px 30px -10px rgb(37 211 102 / 0.55);
+
+  &:hover {
+    transform: translateY(-1px);
+    background-color: #2ee172;
+    box-shadow:
+      inset 0 0 0 1px rgb(255 255 255 / 0.3),
+      0 16px 40px -8px rgb(37 211 102 / 0.7);
+  }
+}
+
+@utility btn-ghost {
+  color: var(--color-mist-100);
+  background-color: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.12);
+
+  &:hover {
+    background-color: rgb(255 255 255 / 0.08);
+    border-color: rgb(45 212 191 / 0.45);
+  }
+}
+
+/* ---------- Backdrops ---------- */
+
+@utility bg-aurora {
+  background:
+    radial-gradient(60rem 40rem at 88% -12%, rgb(34 211 238 / 0.1), transparent 60%),
+    radial-gradient(50rem 36rem at -5% 8%, rgb(52 211 153 / 0.08), transparent 60%),
+    radial-gradient(44rem 30rem at 50% 115%, rgb(45 212 191 / 0.06), transparent 60%);
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+/* Glass look without backdrop-filter, for large surfaces that sit on the flat page background.
+   Re-blurring a big backdrop is costly when rendered on the CPU (exactly how lab tools like PageSpeed render). */
+@utility glass-solid {
+  background-color: rgb(17 26 31 / 0.92);
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015));
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.08),
+    0 20px 50px -24px rgb(0 0 0 / 0.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
