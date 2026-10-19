@@ -44,7 +44,7 @@ src/app/globals.css           Design tokens, glass utilities, buttons, reveal + 
 
 - **Testimonials** (`Testimonials.items` in both message files) are drafts written in each client's voice. Send each client their quote and get approval before going live.
 - **Project case studies** (`Projects.items.*.caseStudy`) describe the build; adjust anything that doesn't match what was actually shipped.
-- **FAQ timelines** (1–2 weeks / 3–5 weeks) and the **About** commitments (ownership, support, preview links) are promises — edit them to match how you actually work.
+- **FAQ** answers (the timeline answer deliberately gives no fixed duration) and the **About** commitments (ownership, support, preview links) are promises — edit them to match how you actually work.
 - **Project links**: Dr. Mohamed Samy and Top Power use their real domains; Dr. Sameh Kasem and Dr. Mahmoud Hassaan still point to `*.vercel.app` preview domains — swap those in `src/lib/projects.ts` once they're live.
 
 ## Adding a project
