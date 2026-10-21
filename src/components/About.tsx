@@ -2,6 +2,7 @@ import { Check, MapPin, Stethoscope } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BrandIcon } from "@/components/BrandIcon";
 import { CountUp } from "@/components/CountUp";
+import { LogoMark } from "@/components/Logo";
 import { Reveal } from "@/components/motion/Reveal";
 import { site, whatsappLink } from "@/lib/site";
 
@@ -13,16 +14,10 @@ export function About() {
   return (
     <section id="about" className="shell defer-render py-20 sm:py-28">
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
-        {/* Profile card. To use a photo, swap the monogram for <Image src={photo} … /> from src/assets. */}
+        {/* Profile card. To use a photo, swap the logo mark for <Image src={photo} … /> from src/assets. */}
         <Reveal className="glass h-fit rounded-3xl p-6 sm:p-8 lg:sticky lg:top-28">
           <div className="flex items-center gap-5">
-            <span
-              aria-hidden
-              dir="ltr"
-              className="grid size-20 shrink-0 place-items-center rounded-3xl bg-linear-to-br from-glow-green to-glow-cyan font-mono text-2xl font-bold text-ink-950 shadow-[0_16px_40px_-12px_rgb(45_212_191/0.7)]"
-            >
-              MA
-            </span>
+            <LogoMark className="size-20 rounded-3xl shadow-[0_16px_40px_-12px_rgb(254_12_15/0.7)]" />
             <div>
               <p className="text-xl font-semibold text-white">{nav("name")}</p>
               <p className="text-sm text-mist-400">{nav("role")}</p>
@@ -31,13 +26,13 @@ export function About() {
 
           <ul className="mt-6 space-y-2.5 text-sm text-mist-300">
             <li className="flex items-center gap-2.5">
-              <MapPin aria-hidden className="size-4 text-glow-teal" />
+              <MapPin aria-hidden className="size-4 text-accent" />
               {t("location")}
             </li>
             <li className="flex items-center gap-2.5">
               <span className="relative ms-1 me-0.5 flex size-2">
-                <span className="absolute inset-0 animate-ping-soft rounded-full bg-glow-green" />
-                <span className="relative size-2 rounded-full bg-glow-green" />
+                <span className="absolute inset-0 animate-ping-soft rounded-full bg-success" />
+                <span className="relative size-2 rounded-full bg-success" />
               </span>
               {t("available")}
             </li>
@@ -68,8 +63,8 @@ export function About() {
 
         <div>
           <Reveal>
-            <p className="inline-flex items-center gap-3 text-sm font-medium text-glow-teal">
-              <span aria-hidden className="h-px w-8 bg-linear-to-r from-glow-green to-glow-cyan rtl:bg-linear-to-l" />
+            <p className="inline-flex items-center gap-3 text-sm font-medium text-accent">
+              <span aria-hidden className="h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
               {t("eyebrow")}
             </p>
             <h2 className="mt-4 text-3xl leading-tight font-semibold text-balance text-white sm:text-4xl ltr:tracking-tight rtl:leading-snug">
@@ -87,16 +82,16 @@ export function About() {
             <ul className="mt-4 grid gap-3 sm:grid-cols-2">
               {(t.raw("principles") as string[]).map((item) => (
                 <li key={item} className="flex gap-3 rounded-2xl border border-white/[0.07] bg-ink-850/50 p-4 text-sm text-mist-200">
-                  <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-glow-green" />
+                  <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
                   {item}
                 </li>
               ))}
             </ul>
           </Reveal>
 
-          <Reveal className="mt-6 rounded-3xl border border-glow-teal/20 bg-glow-teal/[0.05] p-6 sm:p-7">
+          <Reveal className="mt-6 rounded-3xl border border-accent/20 bg-accent/[0.05] p-6 sm:p-7">
             <div className="flex items-start gap-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-glow-green to-glow-cyan text-ink-950">
+              <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white">
                 <Stethoscope aria-hidden className="size-5" />
               </span>
               <div>
@@ -107,7 +102,7 @@ export function About() {
             <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
               {(t.raw("niche.points") as string[]).map((point) => (
                 <li key={point} className="flex gap-2.5 text-sm text-mist-200">
-                  <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-glow-green" />
+                  <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
                   {point}
                 </li>
               ))}

@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* Surfaces — #0e1418 is the page base */
-  --color-ink-950: #090e11;
-  --color-ink-900: #0e1418;
-  --color-ink-850: #111a1f;
-  --color-ink-800: #152027;
-  --color-ink-700: #1d2b33;
+  /* Primary — surfaces run from #000000 (the page base) up to #3d3d3d */
+  --color-ink-950: #000000;
+  --color-ink-900: #000000;
+  --color-ink-850: #121212;
+  --color-ink-800: #1f1f1f;
+  --color-ink-700: #3d3d3d;
 
-  /* Text */
-  --color-mist-50: #f2f8f7;
-  --color-mist-100: #e3eeec;
-  --color-mist-200: #c7d6d6;
-  --color-mist-300: #a8bbbd;
-  --color-mist-400: #8599a0;
-  --color-mist-500: #74888f; /* ≥4.5:1 on ink-900 and on glass cards */
+  /* Text — neutral greys to sit on pure black */
+  --color-mist-50: #f7f7f7;
+  --color-mist-100: #ececec;
+  --color-mist-200: #d4d4d4;
+  --color-mist-300: #b4b4b4;
+  --color-mist-400: #9a9a9a;
+  --color-mist-500: #808080; /* ≥4.5:1 on ink-900 and on glass cards */
 
-  /* Glow accents */
-  --color-glow-green: #34d399;
-  --color-glow-teal: #2dd4bf;
-  --color-glow-cyan: #22d3ee;
-  --color-glow-sky: #7dd3fc;
+  /* Secondary — the red gradient, light → deep. `accent` alone is text-safe on black (5.3:1); `accent-deep` (2.7:1) is for fills only. */
+  --color-accent: #fe0c0f;
+  --color-accent-deep: #ab0005;
+
+  /* Status only (online dots, "live" badges, success messages): green keeps its universal meaning. */
+  --color-success: #34d399;
 
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -36,6 +37,7 @@
   --animate-gauge: gauge 1.8s var(--ease-out-expo) both;
   --animate-ping-soft: ping-soft 2s ease-out infinite;
   --animate-ring: ring 2.4s ease-out infinite;
+  --animate-orbit: orbit 7s linear infinite;
 
   @keyframes rise {
     from {
@@ -90,6 +92,11 @@
       opacity: 0;
     }
   }
+  @keyframes orbit {
+    to {
+      transform: rotate(1turn);
+    }
+  }
 }
 
 /* Arabic pages: Readex Pro carries both Arabic and Latin glyphs, so mixed lines share one rhythm. */
@@ -112,12 +119,12 @@
   }
 
   ::selection {
-    background-color: rgb(45 212 191 / 0.3);
+    background-color: rgb(254 12 15 / 0.4);
     color: #fff;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-glow-teal);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 }
@@ -170,7 +177,7 @@
    `glass-blur` adds backdrop-filter and is reserved for surfaces that float over content. */
 
 @utility glass {
-  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.055), rgb(255 255 255 / 0.015));
+  background-image: linear-gradient(180deg, rgb(61 61 61 / 0.3), rgb(61 61 61 / 0.08));
   border: 1px solid rgb(255 255 255 / 0.08);
   box-shadow:
     inset 0 1px 0 0 rgb(255 255 255 / 0.06),
@@ -178,8 +185,8 @@
 }
 
 @utility glass-blur {
-  background-color: rgb(14 20 24 / 0.62);
-  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.02));
+  background-color: rgb(0 0 0 / 0.62);
+  background-image: linear-gradient(180deg, rgb(61 61 61 / 0.35), rgb(61 61 61 / 0.1));
   border: 1px solid rgb(255 255 255 / 0.09);
   box-shadow:
     inset 0 1px 0 0 rgb(255 255 255 / 0.08),
@@ -188,14 +195,9 @@
   backdrop-filter: blur(16px) saturate(150%);
 }
 
+/* Stops short of accent-deep: on black it falls under 3:1, too dim even for headline text. */
 @utility text-gradient {
-  background-image: linear-gradient(
-    100deg,
-    var(--color-glow-green) 0%,
-    var(--color-glow-teal) 40%,
-    var(--color-glow-cyan) 75%,
-    var(--color-glow-sky) 100%
-  );
+  background-image: linear-gradient(100deg, #ff5255 0%, var(--color-accent) 45%, #d0030a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -220,7 +222,7 @@
   &::before {
     background: radial-gradient(
       26rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
-      rgb(45 212 191 / 0.09),
+      rgb(254 12 15 / 0.09),
       transparent 45%
     );
   }
@@ -228,7 +230,7 @@
     padding: 1px;
     background: radial-gradient(
       20rem circle at var(--spot-x, 50%) var(--spot-y, 0%),
-      rgb(45 212 191 / 0.55),
+      rgb(254 12 15 / 0.55),
       transparent 50%
     );
     -webkit-mask:
@@ -241,6 +243,20 @@
   &:hover::after {
     opacity: 1;
   }
+}
+
+/* Two comet-like streaks for a framed photo: a rotating layer behind a padded ring, clipped by the frame's
+   overflow, so only the ring shows them. Rotating a layer stays on the compositor; animating the gradient angle would repaint every frame. */
+@utility frame-beam {
+  background: conic-gradient(
+    transparent 0 28%,
+    rgb(254 12 15 / 0.9) 44%,
+    #ffd6d6 48.5%,
+    transparent 50% 78%,
+    rgb(254 12 15 / 0.9) 94%,
+    #ffd6d6 98.5%,
+    transparent 100%
+  );
 }
 
 /* ---------- Buttons ---------- */
@@ -273,17 +289,17 @@
 }
 
 @utility btn-primary {
-  color: var(--color-ink-950);
-  background-image: linear-gradient(100deg, var(--color-glow-green), var(--color-glow-cyan));
+  color: #fff;
+  background-image: linear-gradient(100deg, var(--color-accent), var(--color-accent-deep));
   box-shadow:
     inset 0 0 0 1px rgb(255 255 255 / 0.15),
-    0 10px 30px -10px rgb(45 212 191 / 0.55);
+    0 10px 30px -10px rgb(254 12 15 / 0.55);
 
   &:hover {
     transform: translateY(-1px);
     box-shadow:
       inset 0 0 0 1px rgb(255 255 255 / 0.25),
-      0 16px 40px -8px rgb(45 212 191 / 0.7);
+      0 16px 40px -8px rgb(254 12 15 / 0.7);
   }
 }
 
@@ -303,14 +319,14 @@
   }
 }
 
+/* The primary pair as a button: #3d3d3d → #000000. */
 @utility btn-ghost {
   color: var(--color-mist-100);
-  background-color: rgb(255 255 255 / 0.04);
+  background-image: linear-gradient(180deg, var(--color-ink-700), var(--color-ink-950));
   border: 1px solid rgb(255 255 255 / 0.12);
 
   &:hover {
-    background-color: rgb(255 255 255 / 0.08);
-    border-color: rgb(45 212 191 / 0.45);
+    border-color: rgb(254 12 15 / 0.55);
   }
 }
 
@@ -318,9 +334,9 @@
 
 @utility bg-aurora {
   background:
-    radial-gradient(60rem 40rem at 88% -12%, rgb(34 211 238 / 0.1), transparent 60%),
-    radial-gradient(50rem 36rem at -5% 8%, rgb(52 211 153 / 0.08), transparent 60%),
-    radial-gradient(44rem 30rem at 50% 115%, rgb(45 212 191 / 0.06), transparent 60%);
+    radial-gradient(60rem 40rem at 88% -12%, rgb(254 12 15 / 0.1), transparent 60%),
+    radial-gradient(50rem 36rem at -5% 8%, rgb(171 0 5 / 0.1), transparent 60%),
+    radial-gradient(44rem 30rem at 50% 115%, rgb(254 12 15 / 0.05), transparent 60%);
 }
 
 @utility bg-grid {
@@ -335,8 +351,8 @@
 /* Glass look without backdrop-filter, for large surfaces that sit on the flat page background.
    Re-blurring a big backdrop is costly when rendered on the CPU (exactly how lab tools like PageSpeed render). */
 @utility glass-solid {
-  background-color: rgb(17 26 31 / 0.92);
-  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015));
+  background-color: rgb(18 18 18 / 0.92);
+  background-image: linear-gradient(180deg, rgb(61 61 61 / 0.3), rgb(61 61 61 / 0.06));
   border: 1px solid rgb(255 255 255 / 0.09);
   box-shadow:
     inset 0 1px 0 0 rgb(255 255 255 / 0.08),

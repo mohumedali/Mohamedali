@@ -19,14 +19,14 @@ export function CaseStudy({ title, children }: { title: string; children: ReactN
   );
 
   return (
-    <div className="mt-6 rounded-2xl border border-glow-teal/15 bg-glow-teal/[0.04] p-4">
-      <p className="hidden items-center gap-2 text-sm font-semibold text-glow-teal lg:flex">{heading}</p>
+    <div className="mt-6 rounded-2xl border border-accent/15 bg-accent/[0.04] p-4">
+      <p className="hidden items-center gap-2 text-sm font-semibold text-accent lg:flex">{heading}</p>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={id}
-        className="flex w-full items-center gap-2 text-start text-sm font-semibold text-glow-teal lg:hidden"
+        className="flex w-full items-center gap-2 text-start text-sm font-semibold text-accent lg:hidden"
       >
         {heading}
         <ChevronDown aria-hidden className={cn("ms-auto size-4 shrink-0 transition-transform", open && "rotate-180")} />

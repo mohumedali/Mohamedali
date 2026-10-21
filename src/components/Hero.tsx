@@ -15,13 +15,13 @@ export function Hero() {
     <section id="top" className="relative overflow-x-clip pt-32 pb-16 sm:pt-40 lg:pb-24">
       <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 -z-10" />
 
-      {/* grid-cols-1 = minmax(0,1fr): otherwise the code card's longest line sets a min track width wider than small phones. */}
+      {/* grid-cols-1 = minmax(0,1fr): otherwise a child's min-content width could set a track wider than small phones. */}
       <div className="shell grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div>
-          <p className="inline-flex animate-rise items-center gap-2.5 rounded-full border border-glow-teal/25 bg-glow-teal/[0.07] px-3.5 py-1.5 text-xs font-medium text-glow-teal sm:text-sm">
+          <p className="inline-flex animate-rise items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent sm:text-sm">
             <span className="relative flex size-2">
-              <span className="absolute inset-0 animate-ping-soft rounded-full bg-glow-green" />
-              <span className="relative size-2 rounded-full bg-glow-green" />
+              <span className="absolute inset-0 animate-ping-soft rounded-full bg-success" />
+              <span className="relative size-2 rounded-full bg-success" />
             </span>
             {t("available")}
           </p>
@@ -68,6 +68,7 @@ export function Hero() {
         </div>
 
         <HeroVisual
+          portraitAlt={t("portraitAlt")}
           stackLabel={t("stackLabel")}
           auditLabel={t("auditLabel")}
           scores={scoreKeys.map((key) => t(`scores.${key}`))}

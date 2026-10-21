@@ -48,7 +48,7 @@ export function Footer() {
                   href={href}
                   aria-label={label}
                   {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer me" })}
-                  className="grid size-10 place-items-center rounded-xl border border-white/10 text-mist-300 transition-colors hover:border-glow-teal/40 hover:text-white"
+                  className="grid size-10 place-items-center rounded-xl border border-white/10 text-mist-300 transition-colors hover:border-accent/40 hover:text-white"
                 >
                   {icon}
                 </a>

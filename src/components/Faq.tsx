@@ -19,11 +19,11 @@ export function Faq() {
             <details
               key={id}
               open={i === 0}
-              className="group glass rounded-2xl p-5 transition-colors open:border-glow-teal/25 sm:p-6"
+              className="group glass rounded-2xl p-5 transition-colors open:border-accent/25 sm:p-6"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-white [&::-webkit-details-marker]:hidden">
                 {t(`items.${id}.q`)}
-                <Plus aria-hidden className="size-5 shrink-0 text-glow-teal transition-transform duration-300 group-open:rotate-45" />
+                <Plus aria-hidden className="size-5 shrink-0 text-accent transition-transform duration-300 group-open:rotate-45" />
               </summary>
               <p className="mt-3 leading-relaxed text-mist-300">{t(`items.${id}.a`)}</p>
             </details>

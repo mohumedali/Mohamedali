@@ -1,7 +1,9 @@
 "use client";
 
 import { m, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
+import Image from "next/image";
 import type { PointerEvent } from "react";
+import portrait from "@/assets/mohamed-ali.webp";
 import { BrandIcon } from "@/components/BrandIcon";
 import type { BrandIconName } from "@/lib/brand-icons";
 import { cn } from "@/lib/cn";
@@ -11,8 +13,8 @@ type Badge = {
   label: string;
   color: string;
   /**
-   * Desktop placement around the code card. Physical (left/right) on purpose: the code is LTR in both
-   * locales, so badges must stay clear of where lines start, never mirror onto them.
+   * Desktop placement around the portrait. Logical (start/end) so the composition mirrors with the page in RTL.
+   * Badges sit on the side edges (clear of the face) and above the audit card.
    */
   position: string;
   /** Parallax strength in px. */
@@ -21,43 +23,21 @@ type Badge = {
   phase: string;
 };
 
-// Floating from `xl` only: at `lg` the card is too narrow, so the side badges would cover the code and clip at the viewport edge.
+// Floating from `xl` only: at `lg` the column is too narrow, so the side badges would clip at the viewport edge.
 const badges: Badge[] = [
-  { icon: "nextjs", label: "Next.js", color: "#ffffff", position: "xl:-top-5 xl:left-[42%]", depth: 18, phase: "0s" },
-  { icon: "supabase", label: "Supabase", color: "#3fcf8e", position: "xl:-top-4 xl:-right-2", depth: 22, phase: "-2.2s" },
-  { icon: "dotnet", label: "ASP.NET Core", color: "#a78bfa", position: "xl:top-[27%] xl:-right-14", depth: 26, phase: "-1.6s" },
-  { icon: "react", label: "React 19", color: "#61dafb", position: "xl:top-[47%] xl:-right-8", depth: 30, phase: "-3.2s" },
-  { icon: "typescript", label: "TypeScript", color: "#4b9be8", position: "xl:-bottom-6 xl:left-2", depth: 16, phase: "-4.4s" },
-  { icon: "tailwind", label: "Tailwind CSS", color: "#38bdf8", position: "xl:-bottom-7 xl:right-10", depth: 20, phase: "-1s" },
-];
-
-type Token = [kind: keyof typeof tokenColor, text: string];
-
-const tokenColor = {
-  k: "text-[#c4a7ff]", // keyword
-  f: "text-glow-sky", // function
-  p: "text-glow-teal", // property
-  s: "text-[#86efac]", // string
-  c: "text-mist-500 italic", // comment
-  x: "text-mist-200", // punctuation / plain
-} as const;
-
-const code: Token[][] = [
-  [["k", "const "], ["x", "site = "], ["k", "await "], ["f", "build"], ["x", "({"]],
-  [["p", "  stack"], ["x", ": ["], ["s", '"next"'], ["x", ", "], ["s", '"dotnet"'], ["x", ", "], ["s", '"supabase"'], ["x", "],"]],
-  [["p", "  locales"], ["x", ": ["], ["s", '"ar"'], ["x", ", "], ["s", '"en"'], ["x", "],"], ["c", " // RTL ⇄ LTR"]],
-  [["p", "  rendering"], ["x", ": "], ["s", '"static"'], ["x", ","]],
-  [["p", "  seo"], ["x", ": { "], ["p", "schema"], ["x", ": "], ["k", "true"], ["x", ", "], ["p", "hreflang"], ["x", ": "], ["k", "true"], ["x", " },"]],
-  [["x", "});"]],
-  [],
-  [["x", "site."], ["p", "lighthouse"], ["x", ";"], ["c", " // → 100"]],
+  { icon: "supabase", label: "Supabase", color: "#3fcf8e", position: "xl:-top-4 xl:end-8", depth: 22, phase: "-2.2s" },
+  { icon: "nextjs", label: "Next.js", color: "#ffffff", position: "xl:top-16 xl:-start-14", depth: 18, phase: "0s" },
+  { icon: "dotnet", label: "ASP.NET Core", color: "#a78bfa", position: "xl:top-36 xl:-end-24", depth: 26, phase: "-1.6s" },
+  { icon: "react", label: "React 19", color: "#61dafb", position: "xl:top-60 xl:-start-16", depth: 30, phase: "-3.2s" },
+  { icon: "typescript", label: "TypeScript", color: "#4b9be8", position: "xl:top-76 xl:-end-20", depth: 16, phase: "-4.4s" },
+  { icon: "tailwind", label: "Tailwind CSS", color: "#38bdf8", position: "xl:top-92 xl:-start-24", depth: 20, phase: "-1s" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-type Props = { stackLabel: string; auditLabel: string; scores: string[] };
+type Props = { portraitAlt: string; stackLabel: string; auditLabel: string; scores: string[] };
 
-export function HeroVisual({ stackLabel, auditLabel, scores }: Props) {
+export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Props) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const x = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.4 });
@@ -76,65 +56,70 @@ export function HeroVisual({ stackLabel, auditLabel, scores }: Props) {
   }
 
   return (
-    <div
-      onPointerMove={onPointerMove}
-      onPointerLeave={onPointerLeave}
-      className="relative mx-auto w-full max-w-xl lg:max-w-none xl:px-6"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(closest-side,rgb(45_212_191/0.16),transparent)]"
-      />
+    <div onPointerMove={onPointerMove} onPointerLeave={onPointerLeave} className="relative w-full">
+      <div className="relative isolate mx-auto w-full max-w-[25rem]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-16 -z-10 bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]"
+        />
 
-      <m.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease, delay: 0.15 }}
-        className="glass-solid @container overflow-hidden rounded-3xl"
-      >
-        <div dir="ltr" className="flex items-center gap-2 border-b border-white/[0.06] px-4 py-3">
-          <span className="size-2.5 rounded-full bg-[#ff5f57]/80" />
-          <span className="size-2.5 rounded-full bg-[#febc2e]/80" />
-          <span className="size-2.5 rounded-full bg-[#28c840]/80" />
-          <span className="ms-3 font-mono text-xs text-mist-400">deliver.ts</span>
+        {/* `lift` moves without fading: the portrait can be the LCP element, so it must be visible from its first paint. */}
+        <div className="relative isolate animate-lift [animation-delay:150ms]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -start-8 -top-8 -z-10 size-36 bg-[radial-gradient(rgb(254_12_15/0.5)_1.2px,transparent_1.6px)] bg-[length:14px_14px] [mask-image:radial-gradient(closest-side,#000,transparent)]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute start-3 -end-3 top-3 -bottom-3 -z-10 rounded-[2rem] border border-accent/35 sm:start-4 sm:-end-4 sm:top-4 sm:-bottom-4"
+          />
+
+          {/* Ring = 3px of padding showing the frame's own accent gradient, with the orbiting beam layered over it. */}
+          <div className="group relative overflow-hidden rounded-[2rem] bg-linear-to-br from-accent to-accent-deep p-[3px] shadow-[0_28px_80px_-30px_rgb(254_12_15/0.65)]">
+            <div
+              aria-hidden
+              className="frame-beam pointer-events-none absolute top-1/2 left-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-orbit"
+            />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[calc(2rem_-_3px)] bg-ink-950">
+              <Image
+                src={portrait}
+                alt={portraitAlt}
+                fill
+                preload
+                placeholder="blur"
+                sizes="(min-width: 30rem) 25rem, calc(100vw - 2.5rem)"
+                className="object-cover object-[50%_18%] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-t from-ink-950/75 via-transparent to-transparent shadow-[inset_0_0_0_1px_rgb(255_255_255/0.08)]"
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Font scales with the card (container query) so the longest line (40 mono chars ≈ 24em) always fits:
-            10px on a 320px phone, capped at 13px on wider cards. */}
-        <pre
-          dir="ltr"
-          className="overflow-x-auto px-4 py-5 font-mono text-[length:clamp(10px,calc((100cqi_-_2rem)/25),13px)] leading-[1.85] sm:px-5"
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.35 }}
+          className="glass-blur @container relative z-10 mx-3 -mt-16 rounded-2xl px-4 py-4 sm:mx-6 sm:px-5"
         >
-          <code>
-            {code.map((line, i) => (
-              <span key={i} className="block min-h-[1.85em]">
-                {line.map(([kind, text], j) => (
-                  <span key={j} className={tokenColor[kind]}>
-                    {text}
-                  </span>
-                ))}
-              </span>
-            ))}
-          </code>
-        </pre>
-
-        <div className="border-t border-white/[0.06] px-4 py-5 sm:px-5">
           <p className="text-xs font-medium text-mist-400">{auditLabel}</p>
-          <ul className="mt-4 grid grid-cols-4 gap-1 sm:gap-2">
+          <ul className="mt-3 grid grid-cols-4 gap-1 sm:gap-2">
             {scores.map((label, i) => (
               <li key={label}>
                 <Gauge label={label} delay={0.5 + i * 0.12} />
               </li>
             ))}
           </ul>
-        </div>
-      </m.div>
+        </m.div>
 
-      <ul aria-label={stackLabel} className="mt-6 flex flex-wrap justify-center gap-2.5 xl:mt-0">
-        {badges.map((badge, i) => (
-          <FloatingBadge key={badge.label} badge={badge} index={i} x={x} y={y} />
-        ))}
-      </ul>
+        <ul aria-label={stackLabel} className="mt-6 flex flex-wrap justify-center gap-2.5 xl:mt-0">
+          {badges.map((badge, i) => (
+            <FloatingBadge key={badge.label} badge={badge} index={i} x={x} y={y} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -150,7 +135,7 @@ function FloatingBadge({ badge, index, x, y }: { badge: Badge; index: number; x:
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, ease, delay: 0.45 + index * 0.08 }}
-      className={cn("xl:absolute", badge.position)}
+      className={cn("xl:absolute xl:z-20", badge.position)}
     >
       <span className="block animate-float" style={{ animationDelay: badge.phase }}>
         <m.span
@@ -173,13 +158,13 @@ function Gauge({ label, delay }: { label: string; delay: number }) {
     <div className="flex flex-col items-center gap-2 text-center">
       <div className="relative size-12 sm:size-14">
         <svg viewBox="0 0 64 64" className="size-full -rotate-90" aria-hidden>
-          <circle cx="32" cy="32" r="27" fill="rgb(52 211 153 / 0.08)" stroke="rgb(52 211 153 / 0.15)" strokeWidth="5" />
+          <circle cx="32" cy="32" r="27" fill="rgb(254 12 15 / 0.08)" stroke="rgb(254 12 15 / 0.18)" strokeWidth="5" />
           <circle
             cx="32"
             cy="32"
             r="27"
             fill="none"
-            stroke="var(--color-glow-green)"
+            stroke="var(--color-accent)"
             strokeWidth="5"
             strokeLinecap="round"
             pathLength={100}
@@ -188,7 +173,7 @@ function Gauge({ label, delay }: { label: string; delay: number }) {
             style={{ animationDelay: `${delay}s` }}
           />
         </svg>
-        <span className="absolute inset-0 grid place-items-center font-mono text-sm font-semibold text-glow-green">100</span>
+        <span className="absolute inset-0 grid place-items-center font-mono text-sm font-semibold text-accent">100</span>
       </div>
       {/* Scales with the card so single long words ("Performance", "Accessibility") never touch on 320px phones. */}
       <span className="text-[length:clamp(9.5px,3.3cqi,11px)] leading-tight text-mist-400">{label}</span>

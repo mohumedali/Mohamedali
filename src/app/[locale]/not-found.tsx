@@ -7,7 +7,7 @@ export default function LocaleNotFound() {
   return (
     <main className="grid min-h-dvh place-items-center p-6 text-center">
       <div>
-        <p className="font-mono text-sm text-glow-teal">404</p>
+        <p className="font-mono text-sm text-accent">404</p>
         <h1 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">{t("title")}</h1>
         <p className="mt-3 text-mist-300">{t("body")}</p>
         <Link href="/" className="btn btn-primary mt-8">

@@ -13,7 +13,7 @@ type Channel = "endpoint" | "whatsapp" | "email";
 type Status = "idle" | "sending" | "sent" | "whatsapp" | "mailto" | "fallback";
 
 const fieldClass =
-  "w-full rounded-xl border border-white/10 bg-ink-850/70 px-4 py-3 text-mist-50 placeholder:text-mist-500 transition-colors outline-none focus:border-glow-teal/60 focus:ring-4 focus:ring-glow-teal/10 user-invalid:border-red-400/60";
+  "w-full rounded-xl border border-white/10 bg-ink-850/70 px-4 py-3 text-mist-50 placeholder:text-mist-500 transition-colors outline-none focus:border-accent/60 focus:ring-4 focus:ring-accent/10 user-invalid:border-red-400/60";
 
 export function ContactForm() {
   const t = useTranslations("Contact");
@@ -165,7 +165,7 @@ export function ContactForm() {
         </button>
       </div>
 
-      <p role="status" aria-live="polite" className="mt-4 flex min-h-5 items-start gap-2 text-sm text-glow-green">
+      <p role="status" aria-live="polite" className="mt-4 flex min-h-5 items-start gap-2 text-sm text-success">
         {feedback && <CircleCheck aria-hidden className="mt-0.5 size-4 shrink-0" />}
         {feedback}
       </p>
@@ -208,9 +208,9 @@ export function CopyEmailButton({ email }: { email: string }) {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs text-mist-300 transition-colors hover:border-glow-teal/40 hover:text-white"
+      className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-3 py-1.5 text-xs text-mist-300 transition-colors hover:border-accent/40 hover:text-white"
     >
-      {copied ? <Check aria-hidden className="size-3.5 text-glow-green" /> : <Copy aria-hidden className="size-3.5" />}
+      {copied ? <Check aria-hidden className="size-3.5 text-success" /> : <Copy aria-hidden className="size-3.5" />}
       <span aria-live="polite">{copied ? t("copied") : t("copy")}</span>
     </button>
   );

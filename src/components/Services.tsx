@@ -23,7 +23,7 @@ export function Services() {
           <StaggerItem key={id} className="h-full">
             <Spotlight className="glass flex h-full flex-col rounded-3xl p-6 sm:p-7">
               <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-2xl bg-linear-to-br from-glow-green to-glow-cyan text-ink-950 shadow-[0_10px_30px_-10px_rgb(45_212_191/0.6)]">
+                <span className="grid size-12 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white shadow-[0_10px_30px_-10px_rgb(254_12_15/0.6)]">
                   <Icon aria-hidden className="size-5" />
                 </span>
                 <span aria-hidden className="font-mono text-sm text-mist-500">
@@ -35,7 +35,7 @@ export function Services() {
               <ul className="mt-auto space-y-2.5 border-t border-white/[0.06] pt-5">
                 {(t.raw(`items.${id}.points`) as string[]).map((point) => (
                   <li key={point} className="flex gap-2.5 text-sm text-mist-200">
-                    <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-glow-green" />
+                    <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
                     {point}
                   </li>
                 ))}

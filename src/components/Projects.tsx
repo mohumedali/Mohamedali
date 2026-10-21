@@ -55,15 +55,15 @@ function ProjectCard({ project }: { project: Project }) {
               className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             />
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink-950/60 via-transparent to-transparent" />
-            <span className="absolute start-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-ink-950/80 px-2.5 py-1 text-xs font-medium text-glow-green ring-1 ring-glow-green/30">
-              <span aria-hidden className="size-1.5 rounded-full bg-glow-green" />
+            <span className="absolute start-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-ink-950/80 px-2.5 py-1 text-xs font-medium text-success ring-1 ring-success/30">
+              <span aria-hidden className="size-1.5 rounded-full bg-success" />
               {t("liveBadge")}
             </span>
           </div>
         </div>
 
         <div className="flex flex-1 flex-col px-5 pt-4 pb-6 sm:px-7 sm:pb-7">
-          <p className="text-xs text-glow-teal ltr:font-mono ltr:tracking-wide ltr:uppercase">
+          <p className="text-xs text-accent ltr:font-mono ltr:tracking-wide ltr:uppercase">
             {t(`items.${project.id}.category`)}
           </p>
           <h3 className="mt-2 text-2xl font-semibold text-white">{name}</h3>
@@ -72,7 +72,7 @@ function ProjectCard({ project }: { project: Project }) {
           <ul className="mt-5 space-y-2">
             {highlights.map((item) => (
               <li key={item} className="flex gap-2.5 text-sm text-mist-200">
-                <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-glow-green" />
+                <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" />
                 {item}
               </li>
             ))}

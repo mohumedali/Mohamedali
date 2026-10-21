@@ -30,7 +30,7 @@ export function Skills() {
           <StaggerItem key={id} className="h-full">
             <Spotlight className="glass h-full rounded-3xl p-6 sm:p-8">
               <div className="flex items-start gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-glow-green/20 to-glow-cyan/5 text-glow-teal ring-1 ring-glow-teal/25">
+                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent/20 to-accent-deep/5 text-accent ring-1 ring-accent/25">
                   <Icon aria-hidden className="size-5" />
                 </span>
                 <div>
@@ -61,13 +61,13 @@ export function Skills() {
           {flow.map(({ id, icon: Icon }, i) => (
             <Fragment key={id}>
               {i > 0 && (
-                <div aria-hidden className="flex items-center justify-center text-glow-teal/70">
+                <div aria-hidden className="flex items-center justify-center text-accent/70">
                   <ArrowLeftRight className="size-5 rotate-90 md:rotate-0" />
                 </div>
               )}
               <div className="rounded-2xl border border-white/[0.07] bg-ink-850/50 p-5">
                 <div className="flex items-center gap-3">
-                  <Icon aria-hidden className="size-5 text-glow-cyan" />
+                  <Icon aria-hidden className="size-5 text-accent" />
                   <p className="font-semibold text-white">{t(`flow.${id}.title`)}</p>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-mist-400">{t(`flow.${id}.detail`)}</p>

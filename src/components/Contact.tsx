@@ -13,13 +13,13 @@ export function Contact() {
       <Reveal className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:p-14">
         <div
           aria-hidden
-          className="pointer-events-none absolute -end-24 -top-48 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(45_212_191/0.16),transparent)]"
+          className="pointer-events-none absolute -end-24 -top-48 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]"
         />
 
         <div className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
-            <p className="inline-flex items-center gap-3 text-sm font-medium text-glow-teal">
-              <span aria-hidden className="h-px w-8 bg-linear-to-r from-glow-green to-glow-cyan rtl:bg-linear-to-l" />
+            <p className="inline-flex items-center gap-3 text-sm font-medium text-accent">
+              <span aria-hidden className="h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
               {t("eyebrow")}
             </p>
             <h2 className="mt-4 text-3xl leading-tight font-semibold text-balance text-white sm:text-4xl ltr:tracking-tight rtl:leading-snug">
@@ -51,7 +51,7 @@ export function Contact() {
                   <a
                     href={`mailto:${site.email}`}
                     dir="ltr"
-                    className="text-lg font-semibold break-all text-white transition-colors hover:text-glow-teal sm:text-xl"
+                    className="text-lg font-semibold break-all text-white transition-colors hover:text-accent sm:text-xl"
                   >
                     {site.email}
                   </a>

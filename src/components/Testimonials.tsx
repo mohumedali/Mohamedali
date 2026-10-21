@@ -22,7 +22,7 @@ export function Testimonials() {
           return (
             <StaggerItem key={id} className="h-full">
               <Spotlight className="glass flex h-full flex-col rounded-3xl p-6 sm:p-8">
-                <Quote aria-hidden className="size-8 text-glow-teal/60 rtl:-scale-x-100" />
+                <Quote aria-hidden className="size-8 text-accent/60 rtl:-scale-x-100" />
                 <blockquote className="mt-4 flex-1 text-base leading-relaxed text-mist-100 sm:text-lg">
                   <p>{t(`items.${id}.quote`)}</p>
                 </blockquote>
@@ -31,7 +31,7 @@ export function Testimonials() {
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-full bg-linear-to-br from-glow-green/25 to-glow-cyan/10 text-lg font-semibold text-glow-teal ring-1 ring-glow-teal/30"
+                      className="grid size-11 shrink-0 place-items-center rounded-full bg-linear-to-br from-accent/25 to-accent-deep/10 text-lg font-semibold text-accent ring-1 ring-accent/30"
                     >
                       {initial}
                     </span>
@@ -45,7 +45,7 @@ export function Testimonials() {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={hostname(url)}
-                    className="inline-flex shrink-0 items-center gap-1 rounded-full border border-white/10 px-3 py-1.5 text-xs text-mist-300 transition-colors hover:border-glow-teal/40 hover:text-glow-teal"
+                    className="inline-flex shrink-0 items-center gap-1 rounded-full border border-white/10 px-3 py-1.5 text-xs text-mist-300 transition-colors hover:border-accent/40 hover:text-accent"
                   >
                     {t("viewProject")}
                     <ArrowUpRight aria-hidden className="size-3.5 rtl:-scale-x-100" />
