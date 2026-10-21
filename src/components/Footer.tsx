@@ -1,7 +1,7 @@
 import { ArrowUp, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BrandIcon } from "@/components/BrandIcon";
-import { LogoMark } from "@/components/Logo";
+import { LogoMark, LogoWordmark } from "@/components/Logo";
 import { site, whatsappLink } from "@/lib/site";
 
 const sections = ["projects", "testimonials", "services", "about", "skills", "process", "faq", "contact"] as const;
@@ -24,7 +24,7 @@ export function Footer() {
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
               <LogoMark />
-              <span className="font-semibold text-white">{nav("name")}</span>
+              <LogoWordmark className="h-7" alt={nav("name")} />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-mist-400">{t("tagline")}</p>
           </div>

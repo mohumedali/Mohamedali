@@ -1,5 +1,6 @@
 import Image from "next/image";
 import mark from "@/assets/logo-mark.png";
+import wordmark from "@/assets/logo-wordmark.png";
 import { cn } from "@/lib/cn";
 
 // Navbar/footer tile. A `className` replaces it whole (size, radius, shadow): cn() concatenates, it doesn't merge.
@@ -18,4 +19,9 @@ export function LogoMark({ className = defaultTile }: { className?: string }) {
       <Image src={mark} alt="" sizes="56px" className="h-auto w-[68%]" />
     </span>
   );
+}
+
+/** "MOHAMED ALI / SOFTWARE ENGINEER" from the brand logo, white on transparent. Size it by height; sits beside <LogoMark>. */
+export function LogoWordmark({ className, alt = "" }: { className?: string; alt?: string }) {
+  return <Image src={wordmark} alt={alt} sizes="240px" className={cn("w-auto shrink-0", className)} />;
 }

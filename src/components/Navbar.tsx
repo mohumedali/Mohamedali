@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { LogoMark } from "@/components/Logo";
+import { LogoMark, LogoWordmark } from "@/components/Logo";
 import { cn } from "@/lib/cn";
 
 const sections = ["projects", "services", "about", "process", "contact"] as const;
@@ -38,13 +38,11 @@ export function Navbar() {
           scrolled || open ? "glass-blur" : "border-transparent",
         )}
       >
-        {/* The name stays in the accessible name on phones (sr-only) and becomes visible from `sm`. */}
+        {/* Phones get the mark only; the wordmark joins it from `sm`. The sr-only name keeps the link named at every width. */}
         <a href="#top" className="flex items-center gap-3 rounded-xl">
           <LogoMark />
-          <span className="sr-only leading-tight sm:not-sr-only">
-            <span className="block text-sm font-semibold text-white">{t("name")}</span>
-            <span className="block text-xs text-mist-400">{t("role")}</span>
-          </span>
+          <LogoWordmark className="hidden h-7 sm:block" />
+          <span className="sr-only">{t("name")}</span>
         </a>
 
         <ul className="hidden items-center gap-1 lg:flex">
