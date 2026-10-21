@@ -1,5 +1,5 @@
 export const site = {
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://mohamed-ali.vercel.app").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://mohamedali-delta.vercel.app").replace(/\/$/, ""),
   email: "midoaliii927@gmail.com",
   linkedin: "https://www.linkedin.com/in/muhamed1ali",
   github: "https://github.com/mohumedali",
