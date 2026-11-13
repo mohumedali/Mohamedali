@@ -1,12 +1,17 @@
 {
   "Meta": {
     "name": "Mohamed Ali",
-    "title": "Mohamed Ali — Senior Full-Stack Engineer | Next.js & ASP.NET Core",
-    "description": "Senior Full-Stack Engineer (Next.js & ASP.NET Core) based in Egypt. 20+ professional, SEO-driven websites delivered across many industries — from clinics and design studios to companies and suppliers.",
+    "title": "Mohamed Ali — Full-Stack Software Engineer | Next.js & ASP.NET Core",
+    "description": "Full-Stack Software Engineer (.NET & Next.js) based in Egypt. ASP.NET Core REST APIs with JWT and role-based access, payment-gateway integrations, and 20+ production websites delivered for clients across many industries.",
     "keywords": [
+      "Full-Stack Software Engineer",
       "Full-Stack Developer",
+      "Software Engineer",
       "Next.js Developer",
       "ASP.NET Core Developer",
+      ".NET Developer",
+      "C#",
+      "REST API",
       "Website developer Egypt",
       "Business website design",
       "Supabase",
@@ -15,15 +20,16 @@
       "Arabic RTL website",
       "Freelance web developer"
     ],
-    "role": "Senior Full-Stack Engineer"
+    "role": "Full-Stack Software Engineer"
   },
   "Nav": {
     "skip": "Skip to content",
     "name": "Mohamed Ali",
-    "role": "Full-Stack Engineer",
+    "role": "Full-Stack Software Engineer",
     "home": "Mohamed Ali — back to top",
     "primary": "Primary",
     "projects": "Projects",
+    "experience": "Experience",
     "testimonials": "Clients",
     "services": "Services",
     "about": "About",
@@ -43,11 +49,13 @@
   "Hero": {
     "available": "Available for new projects",
     "title": "Building <hl>high-performance</hl>, <nb>SEO-driven</nb> <nb>full-stack</nb> web apps that scale.",
-    "subtitle": "I'm Mohamed Ali, a Senior Full-Stack Engineer (.NET & Next.js) based in Egypt. I've delivered 20+ websites across many industries — clinics, design studios, companies and suppliers — professional sites that show up on Google, are easy to manage, and turn visitors into clients.",
+    "subtitle": "I'm Mohamed Ali, a Full-Stack Software Engineer (.NET & Next.js) based in Egypt. I've delivered 20+ production websites for clients across many industries, and I engineer the systems behind them: ASP.NET Core REST APIs with JWT and role-based access, Clean Architecture, and secure payment-gateway integrations.",
     "ctaPrimary": "Start a project",
     "ctaSecondary": "View projects",
+    "ctaCv": "Download CV",
     "whatsapp": "Or message me directly on WhatsApp",
-    "portraitAlt": "Mohamed Ali, Senior Full-Stack Engineer",
+    "profiles": "Profiles",
+    "portraitAlt": "Mohamed Ali, Full-Stack Software Engineer",
     "stackLabel": "Core stack",
     "auditLabel": "Lighthouse target for every new build",
     "scores": {
@@ -83,13 +91,27 @@
   },
   "Projects": {
     "eyebrow": "Selected work",
-    "title": "Production sites built to rank — and to convert",
-    "subtitle": "Live client sites from different industries — each built to load fast, rank on Google and turn visitors into clients.",
+    "title": "Engineering depth, proven in production",
+    "subtitle": "Live client sites built to rank and convert, followed by backend, payment and machine-learning case studies — with source code where it's public.",
+    "groups": {
+      "engineering": {
+        "title": "Engineering case studies",
+        "description": "APIs, payment security and ML, broken down layer by layer."
+      },
+      "client": {
+        "title": "Production client sites",
+        "description": "Live websites that real businesses run on, each with its technical breakdown."
+      }
+    },
     "liveBadge": "Live site",
     "caseStudy": "How it was built",
     "tagsLabel": "Tech & features",
     "live": "Live preview",
     "liveLabel": "Live preview: {name} (opens in a new tab)",
+    "source": "Source code",
+    "sourceLabel": "Source code: {name} on GitHub (opens in a new tab)",
+    "privateClient": "Private repo · client-owned code",
+    "privateRequest": "Private repo · code walkthrough on request",
     "screenshotAlt": "Homepage of the {name} website",
     "tags": {
       "appRouter": "Next.js App Router",
@@ -98,6 +120,86 @@
       "rtl": "Arabic RTL/LTR"
     },
     "items": {
+      "ecommerceApi": {
+        "name": "E-Commerce REST API",
+        "category": "Backend · ASP.NET Core Web API",
+        "summary": "A layered e-commerce backend with JWT authentication, role-based authorization, a product catalog and a cart — documented end to end in Swagger.",
+        "highlights": [
+          "JWT authentication with Admin / User roles securing 10+ endpoints",
+          "Clean Architecture: Controller → Service → Repository",
+          "Product CRUD with pagination and search / filter by name and category",
+          "Cart module: add items, update quantities and remove — 3 dedicated endpoints",
+          "Swagger / OpenAPI docs with Bearer-token support"
+        ],
+        "caseStudy": "Controllers stay thin and hand each request to a service, which holds the business rules and reaches the data through repository interfaces. Entity Framework Core (Code First migrations) maps the domain to SQL Server, and admin-only operations sit behind role-based authorization. Swagger documents every endpoint and accepts a Bearer token, so the whole API can be explored without a frontend.",
+        "flowTitle": "Request flow",
+        "flow": [
+          { "title": "Controllers", "detail": "Routing, JWT auth and role policies" },
+          { "title": "Services", "detail": "Business logic" },
+          { "title": "Repositories", "detail": "Data access behind interfaces" },
+          { "title": "EF Core → SQL Server", "detail": "Code First migrations" }
+        ]
+      },
+      "paymob": {
+        "name": "Paymob Payment Integration",
+        "category": "FinTech · Payment gateway",
+        "summary": "A complete card-payment flow on Paymob: payment sessions created on the server, signed webhooks, and a result page that can't be faked.",
+        "highlights": [
+          "Payment sessions created on the server — API keys never reach the browser",
+          "HMAC-SHA512 verification of every webhook and redirect, compared in constant time",
+          "The webhook is the source of truth: a forged ?success=true URL shows “verification failed”",
+          "Duplicate deliveries are safe: results are keyed per order, and a late callback can't overwrite a successful payment",
+          "Two flows from one codebase: an embedded card iframe or Paymob Unified Checkout"
+        ],
+        "caseStudy": "Built with Next.js Route Handlers and strict TypeScript types for every Paymob payload. The checkout endpoint authenticates with Paymob, registers the order and issues a payment key from server-only modules, with request timeouts and typed errors. When Paymob calls the webhook, the handler rebuilds the 20 signed fields, computes HMAC-SHA512 and compares it in constant time before recording anything — and answers 500 on failure so Paymob retries. The checkout page polls a status endpoint fed only by verified results, so the customer always lands on the right success or failure screen.",
+        "flowTitle": "Payment flow",
+        "flow": [
+          { "title": "Checkout API", "detail": "Order and payment key, server-side" },
+          { "title": "Card iframe", "detail": "Card data stays with Paymob" },
+          { "title": "Webhook", "detail": "HMAC-SHA512, constant-time check" },
+          { "title": "Status page", "detail": "Shows verified results only" }
+        ]
+      },
+      "lms": {
+        "name": "Learning Management System",
+        "category": "Team project · ASP.NET Core MVC",
+        "summary": "A full-featured LMS built as the DEPI graduation project: courses, instructors, enrollments and three user roles on a clean three-layer architecture.",
+        "highlights": [
+          "Three-layer architecture: Presentation, Business Logic (BLL) and Data Access (DAL)",
+          "ASP.NET Core Identity with Admin, Instructor and Student roles",
+          "Admin dashboard with statistics on courses, categories, instructors and enrollments",
+          "Course search and filtering, enrollment management and student profiles",
+          "Repository pattern, service layer and dependency injection throughout"
+        ],
+        "caseStudy": "Built as a team for the Digital Egypt Pioneers Initiative (DEPI). The MVC layer only renders views and calls services; the BLL owns the course and enrollment rules; the DAL wraps Entity Framework Core in repositories over SQL Server. Every layer is wired through ASP.NET Core's dependency injection, and ASP.NET Core Identity handles registration, sign-in and role-based authorization for all three roles.",
+        "flowTitle": "Layers",
+        "flow": [
+          { "title": "Presentation", "detail": "MVC, Razor views, Bootstrap 5" },
+          { "title": "BLL", "detail": "Services and course rules" },
+          { "title": "DAL", "detail": "Repositories over EF Core" },
+          { "title": "SQL Server + Identity", "detail": "Three roles, role-based access" }
+        ]
+      },
+      "churn": {
+        "name": "Customer Churn Prediction",
+        "category": "Machine learning · Python",
+        "summary": "A model that flags the customers most likely to cancel, so a retention team knows exactly who to call first.",
+        "highlights": [
+          "80.3% accuracy and 0.848 ROC-AUC on a held-out test set (baseline: 73.5%)",
+          "The riskiest 20% of customers contain 51% of all churners — about 2.5× better than random",
+          "Soft-voting ensemble of CatBoost, XGBoost and Logistic Regression",
+          "Five model families tuned with Optuna on 5-fold stratified cross-validation",
+          "A scoring CLI that outputs a churn probability and risk tier for each customer"
+        ],
+        "caseStudy": "Trained on the public IBM Telco dataset (7,043 customers). A stratified 20% test set is locked away and used exactly once, at the end, so the reported numbers are an honest estimate. Feature engineering — service counts, average spend, a price-change signal — lives inside the scikit-learn pipeline, so nothing leaks between folds and the same code runs at prediction time. The saved pipeline scores new customers from a CSV and sorts them by risk.",
+        "flowTitle": "ML pipeline",
+        "flow": [
+          { "title": "Feature pipeline", "detail": "Cleaning and engineered features" },
+          { "title": "Model search", "detail": "5 models, Optuna, 5-fold CV" },
+          { "title": "Ensemble", "detail": "CatBoost + XGBoost + LogReg" },
+          { "title": "predict.py", "detail": "Churn probability and risk tier" }
+        ]
+      },
       "samehKasem": {
         "name": "Dr. Sameh Kasem",
         "category": "Neurosurgery · Medical portal",
@@ -150,6 +252,78 @@
         "tag": "Product catalog"
       }
     }
+  },
+  "Experience": {
+    "eyebrow": "Experience & credentials",
+    "title": "Industry experience behind the code",
+    "subtitle": "Agency work, engineering internships and training — the same timeline as my CV.",
+    "work": "Work & internships",
+    "current": "Current",
+    "internship": "Internship",
+    "roles": {
+      "transition": {
+        "title": "Full-Stack Developer (Next.js)",
+        "company": "Transition Advertising Agency",
+        "period": "Sep 2026 – Present",
+        "points": [
+          "Build and maintain full-stack web apps for agency clients with Next.js, React and TypeScript",
+          "SEO-friendly pages with server-side rendering (SSR) and static generation (SSG)",
+          "API routes plus backend and third-party API integrations for dynamic content",
+          "Turn designs into responsive, pixel-perfect interfaces with the design and marketing teams"
+        ]
+      },
+      "depi": {
+        "title": "Full-Stack .NET Developer Intern",
+        "company": "Digital Egypt Pioneers Initiative (DEPI)",
+        "period": "Nov 2025 – Jul 2026",
+        "points": [
+          "Developed 3+ backend services with ASP.NET Core Web API, following REST and Clean Architecture",
+          "JWT authentication and role-based access control (Admin / User) securing 10+ endpoints",
+          "Designed 5+ relational data models with EF Core Code First migrations on SQL Server",
+          "Capstone: a complete e-commerce REST API covering products, cart and user operations"
+        ]
+      },
+      "nti": {
+        "title": "MEAN Stack Developer Intern",
+        "company": "NTI — National Telecommunication Institute",
+        "period": "Jul 2025 – Aug 2025",
+        "points": [
+          "Built 2+ full-stack web apps with MongoDB, Express.js, Angular and Node.js in a 2-month intensive program",
+          "Designed and consumed REST APIs with Angular HttpClient, persisting data in MongoDB"
+        ]
+      },
+      "pathline": {
+        "title": "Front-End Developer Intern",
+        "company": "PathLine Academy",
+        "period": "Jun 2025 – Jul 2025",
+        "points": ["Built static and interactive web pages, focusing on responsive design and cross-browser compatibility"]
+      }
+    },
+    "education": {
+      "title": "Education",
+      "degree": "B.Sc. Computer Science & Artificial Intelligence",
+      "school": "Benha University",
+      "period": "2023 – 2027 (expected)"
+    },
+    "certifications": {
+      "title": "Courses & certifications",
+      "items": [
+        { "name": "CS50's Web Programming with Python and JavaScript", "detail": "Harvard / edX" },
+        { "name": "Flutter Fundamentals", "detail": "Creativa Hub Benha" },
+        { "name": "Python Fundamentals & Data Analysis Basics", "detail": "Creativa Hub Benha" }
+      ]
+    },
+    "community": {
+      "title": "Communities",
+      "items": [
+        { "name": "IEEE Benha University", "detail": "Front-End Committee member" },
+        { "name": "GDG Benha University", "detail": "UI/UX Committee member" },
+        { "name": "ICPC Benha University", "detail": "Competitive Programming Committee member" },
+        { "name": "EYE Cairo", "detail": "Vice Head, HR Committee" }
+      ]
+    },
+    "cvNote": "Prefer a document? The full CV is one click away.",
+    "cv": "Download CV (PDF)"
   },
   "Testimonials": {
     "eyebrow": "Client feedback",
@@ -377,6 +551,7 @@
     "tagline": "High-performance, SEO-driven full-stack web apps — Arabic first.",
     "rights": "© {year} Mohamed Ali. All rights reserved.",
     "built": "Built with Next.js, Tailwind CSS & Framer Motion.",
+    "cv": "Download CV (PDF)",
     "top": "Back to top"
   },
   "NotFound": {

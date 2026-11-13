@@ -1,10 +1,10 @@
-import { ArrowUp, Mail } from "lucide-react";
+import { ArrowUp, Download, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BrandIcon } from "@/components/BrandIcon";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 import { site, whatsappLink } from "@/lib/site";
 
-const sections = ["projects", "testimonials", "services", "about", "skills", "process", "faq", "contact"] as const;
+const sections = ["projects", "experience", "testimonials", "services", "about", "skills", "process", "faq", "contact"] as const;
 
 export function Footer() {
   const t = useTranslations("Footer");
@@ -15,6 +15,7 @@ export function Footer() {
     { href: `mailto:${site.email}`, label: site.email, icon: <Mail className="size-4" /> },
     { href: site.linkedin, label: "LinkedIn", icon: <BrandIcon name="linkedin" className="size-4" /> },
     { href: site.github, label: "GitHub", icon: <BrandIcon name="github" className="size-4" /> },
+    { href: site.cv, label: t("cv"), icon: <Download className="size-4" />, download: true },
   ];
 
   return (
@@ -42,11 +43,13 @@ export function Footer() {
           </nav>
 
           <ul className="flex gap-2">
-            {socials.map(({ href, label, icon }) => (
+            {socials.map(({ href, label, icon, download }) => (
               <li key={href}>
                 <a
                   href={href}
                   aria-label={label}
+                  title={label}
+                  download={download}
                   {...(href.startsWith("http") && { target: "_blank", rel: "noopener noreferrer me" })}
                   className="grid size-10 place-items-center rounded-xl border border-white/10 text-mist-300 transition-colors hover:border-accent/40 hover:text-white"
                 >

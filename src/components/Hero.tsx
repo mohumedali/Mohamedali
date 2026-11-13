@@ -1,10 +1,15 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BrandIcon } from "@/components/BrandIcon";
 import { HeroVisual } from "@/components/HeroVisual";
 import { site, whatsappLink } from "@/lib/site";
 
 const scoreKeys = ["performance", "accessibility", "bestPractices", "seo"] as const;
+
+const profiles = [
+  { href: site.github, label: "GitHub", icon: "github" },
+  { href: site.linkedin, label: "LinkedIn", icon: "linkedin" },
+] as const;
 
 export function Hero() {
   const t = useTranslations("Hero");
@@ -62,25 +67,48 @@ export function Hero() {
             <a href="#projects" className="btn btn-ghost">
               {t("ctaSecondary")}
             </a>
+            <a href={site.cv} download className="btn btn-ghost">
+              <Download aria-hidden className="size-4" />
+              {t("ctaCv")}
+            </a>
           </div>
 
-          <a
-            href={whatsappLink(wa("message"))}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="intro-delay-300 mt-6 inline-flex animate-rise items-center gap-3 text-sm text-mist-300 transition-colors hover:text-white sm:gap-2"
-          >
-            {/* Phones: icon chip beside a label-over-number stack. From `sm` it collapses back to a single inline line. */}
-            <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#25d366]/10 ring-1 ring-[#25d366]/25 sm:size-auto sm:bg-transparent sm:ring-0">
-              <BrandIcon name="whatsapp" className="size-4 text-[#25d366]" />
-            </span>
-            <span className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-2">
-              {t("whatsapp")}
-              <span dir="ltr" className="font-mono whitespace-nowrap text-mist-400">
-                {site.whatsapp.display}
+          <div className="intro-delay-300 mt-6 flex animate-rise flex-wrap items-center gap-x-6 gap-y-4">
+            <a
+              href={whatsappLink(wa("message"))}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 text-sm text-mist-300 transition-colors hover:text-white sm:gap-2"
+            >
+              {/* Phones: icon chip beside a label-over-number stack. From `sm` it collapses back to a single inline line. */}
+              <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#25d366]/10 ring-1 ring-[#25d366]/25 sm:size-auto sm:bg-transparent sm:ring-0">
+                <BrandIcon name="whatsapp" className="size-4 text-[#25d366]" />
               </span>
-            </span>
-          </a>
+              <span className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-2">
+                {t("whatsapp")}
+                <span dir="ltr" className="font-mono whitespace-nowrap text-mist-400">
+                  {site.whatsapp.display}
+                </span>
+              </span>
+            </a>
+
+            <ul aria-label={t("profiles")} className="flex items-center gap-2">
+              {profiles.map(({ href, label, icon }) => (
+                <li key={label}>
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer me"
+                    aria-label={label}
+                    title={label}
+                    className="grid size-10 place-items-center rounded-xl border border-white/10 text-mist-300 transition-colors hover:border-accent/40 hover:text-white"
+                  >
+                    <BrandIcon name={icon} className="size-[18px]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <HeroVisual

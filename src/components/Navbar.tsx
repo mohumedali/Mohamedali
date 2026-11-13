@@ -8,7 +8,8 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { LogoMark, LogoWordmark } from "@/components/Logo";
 import { cn } from "@/lib/cn";
 
-const sections = ["projects", "services", "about", "process", "contact"] as const;
+// Five links is all that fits beside the full logo lockup at `lg` (1024px); Process stays reachable from the footer.
+const sections = ["projects", "experience", "services", "about", "contact"] as const;
 
 export function Navbar() {
   const t = useTranslations("Nav");

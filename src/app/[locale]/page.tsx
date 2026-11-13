@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
+import { Experience } from "@/components/Experience";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
@@ -40,12 +41,14 @@ export default async function HomePage({ params }: Props) {
         {t("skip")}
       </a>
       <Navbar />
-      {/* Order follows the client's questions: proof (work, clients) → offer → who → how → details → contact. */}
+      {/* Order follows the visitor's questions: proof (work, experience, clients) → offer → who → how → details → contact.
+          Experience sits right after the work so recruiters see industry validation before the client-facing sections. */}
       <main id="main">
         <Hero />
         <MetricsBar />
         <Marquee />
         <Projects />
+        <Experience />
         <Testimonials />
         <Services />
         <About />

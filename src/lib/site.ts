@@ -3,6 +3,8 @@ export const site = {
   email: "midoaliii927@gmail.com",
   linkedin: "https://www.linkedin.com/in/muhamed1ali",
   github: "https://github.com/mohumedali",
+  /** Served from public/. Replace that file to update the CV everywhere (hero, experience, footer). */
+  cv: "/Mohamed-Ali-CV.pdf",
   whatsapp: {
     number: "201147886551", // international format, no "+" — what wa.me expects
     display: "+20 114 788 6551",

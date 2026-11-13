@@ -22,15 +22,18 @@ Vercel Analytics and Speed Insights are wired in (`app/[locale]/layout.tsx`); en
 
 ## Page structure
 
-Hero → Metrics → Projects → Testimonials → Services → About → Process → Skills → FAQ → Contact, plus a floating WhatsApp button.
-The order follows a client's questions: *can you do it?* (work, clients) → *what do you offer?* → *who are you?* → *how does it work?* → details → contact.
+Hero → Metrics → Projects → Experience → Testimonials → Services → About → Process → Skills → FAQ → Contact, plus a floating WhatsApp button.
+The order follows a visitor's questions: *can you do it?* (work, experience, clients) → *what do you offer?* → *who are you?* → *how does it work?* → details → contact.
+
+The site serves two audiences. Projects shows the launched client sites first, then the engineering case studies. Recruiters and tech leads get those case studies, the Experience timeline, and a CV download in the hero, the Experience section and the footer. Clients get the live sites, testimonials, services and process.
 
 ## Where things live
 
 ```
 messages/ar.json, en.json     All copy. Arabic is the default locale; en.json also types the keys.
-src/lib/site.ts               Email, WhatsApp number, socials, websites-delivered count, site URL
-src/lib/projects.ts           Project URLs + screenshots (copy is in messages)
+src/lib/site.ts               Email, WhatsApp number, socials, CV path, websites-delivered count, site URL
+src/lib/projects.ts           Engineering case studies (repo, stack) + client sites (URL, screenshot); copy is in messages
+public/Mohamed-Ali-CV.pdf     The downloadable CV — replace this file to update it everywhere
 src/app/[locale]/layout.tsx   <html lang dir>, fonts, SEO metadata, analytics
 src/app/[locale]/page.tsx     Page composition + JSON-LD (ProfilePage, Person, WebSite, FAQPage)
 src/app/sitemap.ts, robots.ts, [locale]/opengraph-image.tsx
@@ -46,9 +49,18 @@ src/app/globals.css           Design tokens, glass utilities, buttons, reveal + 
 - **Project case studies** (`Projects.items.*.caseStudy`) describe the build; adjust anything that doesn't match what was actually shipped.
 - **FAQ** answers (the timeline answer deliberately gives no fixed duration) and the **About** commitments (ownership, support, preview links) are promises — edit them to match how you actually work.
 - **Project links**: Dr. Mohamed Samy, Indigo Interiors and Top Power use their real domains; Dr. Sameh Kasem still points to a `*.vercel.app` preview domain — swap it in `src/lib/projects.ts` once it's live.
+- **Engineering case studies**: the E-Commerce API and LMS cards link to `github.com/mohumedali/E-Commerce-API` and `github.com/mohumedali/LMS-DEPI` — make sure both repos are public. Paymob and the churn model have no public repo yet, so they show a "private repo" badge; push them to GitHub and set `repo` in `src/lib/projects.ts` to swap in a "Source code" button.
+- **Experience** (`Experience` in both message files) mirrors the CV. Update it together with `public/Mohamed-Ali-CV.pdf`.
 - **Indigo Interiors** has no testimonial yet. Once the client approves a quote, add `Testimonials.items.indigo` to both message files and `"indigo"` to `quoted` in `src/components/Testimonials.tsx`.
 
 ## Adding a project
+
+**Engineering case study** (no live site — the card shows a four-step architecture flow instead of a screenshot):
+
+1. Add an entry to `engineeringProjects` in `src/lib/projects.ts` (and its id to `EngineeringProjectId`) with its `stack` and, if public, its GitHub `repo`.
+2. Add `Projects.items.<id>` to both message files, including `flowTitle` and a four-step `flow`.
+
+**Client site:**
 
 1. Drop a 1280×800 WebP screenshot in `src/assets/projects/`.
 2. Add an entry to `src/lib/projects.ts` (and its id to `ProjectId`), listing the tech tags that really apply to it.
