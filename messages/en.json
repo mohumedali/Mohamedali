@@ -125,13 +125,16 @@
       "indigo": {
         "name": "Indigo Interiors",
         "category": "Interior design & fit-out · Studio website",
-        "summary": "An elegant showcase for an interior architecture and turnkey fit-out studio working across Abu Dhabi and Cairo — the projects speak first.",
+        "summary": "An elegant site for an interior architecture and turnkey fit-out studio working across Abu Dhabi and Cairo — with a CMS dashboard the studio uses to publish its own projects and articles.",
         "highlights": [
-          "Full-screen hero slider with immersive project imagery",
-          "Project portfolio and design blog, each with its own pages",
-          "Consultation requests routed straight to WhatsApp and phone"
+          "CMS dashboard to manage projects, photo galleries and articles — no developer needed",
+          "Portfolio filtered by sector, with its own page and photo gallery for every project",
+          "Blog with categories, reading time, related articles and one-tap sharing",
+          "Four-step project request form: contact, property, scope & budget, timeline",
+          "Service packages and a five-stage process with timelines and deliverables",
+          "Full-screen hero slider, newsletter sign-up, WhatsApp, phone and Google Maps"
         ],
-        "caseStudy": "Built on Next.js and Supabase, with every page — projects, services and blog articles — pre-rendered as static HTML and LocalBusiness structured data, so the studio's work loads fast and is easy for Google to understand.",
+        "caseStudy": "Built on Next.js with a Supabase-powered CMS: the studio publishes projects, galleries and articles from its own dashboard, with images served from Supabase Storage. Every public page is pre-rendered as static HTML with LocalBusiness structured data, an XML sitemap and Open Graph tags, so the studio's work loads fast and is easy for Google to understand.",
         "tag": "Project portfolio"
       },
       "topPower": {

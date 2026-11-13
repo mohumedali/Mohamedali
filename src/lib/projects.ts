@@ -24,7 +24,7 @@ export const projects: Project[] = [
   { id: "samehKasem", url: "https://dr-sameh-kasem.vercel.app/ar/", image: samehKasem, tags: fullStack },
   { id: "mohamedSamy", url: "https://www.dr-mohamedsamy.com/", image: mohamedSamy, tags: fullStack },
   // English-only site, so no RTL tag.
-  { id: "indigo", url: "https://indigoegy.com/", image: indigo, tags: ["appRouter", "seo"] },
+  { id: "indigo", url: "https://indigoegy.com/", image: indigo, tags: ["appRouter", "supabase", "seo"] },
   { id: "topPower", url: "https://toppower-mep.com/", image: topPower, tags: fullStack },
 ];
 
