@@ -4,7 +4,9 @@ import { Contact } from "@/components/Contact";
 import { Faq } from "@/components/Faq";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
+import { Intro } from "@/components/Intro";
 import { JsonLd } from "@/components/JsonLd";
+import { Marquee } from "@/components/Marquee";
 import { MetricsBar } from "@/components/MetricsBar";
 import { RevealTracker } from "@/components/motion/RevealTracker";
 import { SpotlightTracker } from "@/components/motion/SpotlightTracker";
@@ -27,7 +29,10 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
+      {/* First in the document so it's part of the very first paint. */}
+      <Intro />
       <JsonLd locale={locale} />
+      <div aria-hidden className="scroll-progress" />
       <a
         href="#main"
         className="sr-only z-[60] rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-950 focus:not-sr-only focus:fixed focus:start-4 focus:top-4"
@@ -39,6 +44,7 @@ export default async function HomePage({ params }: Props) {
       <main id="main">
         <Hero />
         <MetricsBar />
+        <Marquee />
         <Projects />
         <Testimonials />
         <Services />

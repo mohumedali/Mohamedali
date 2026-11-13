@@ -18,6 +18,12 @@ const readex = Readex_Pro({ subsets: ["arabic"], variable: "--font-readex", disp
 
 type Props = { children: ReactNode; params: Promise<{ locale: string }> };
 
+/**
+ * Runs during HTML parsing, before the first paint: the opening intro (<Intro>) plays once per browser session,
+ * and never when the visitor lands on a section link (#contact…). `skip` hides it and removes the hero's entrance offset.
+ */
+const introScript = `(function(){try{var d=document.documentElement;if(location.hash||sessionStorage.getItem("intro")){d.setAttribute("data-intro","skip");window.__introSkip=1}else{sessionStorage.setItem("intro","1")}}catch(e){}})()`;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -86,12 +92,17 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { Nav, Contact } = await getMessages();
 
   return (
+    // suppressHydrationWarning: the inline script may add data-intro before React hydrates.
     <html
       lang={locale}
       dir={localeDir(locale)}
       data-scroll-behavior="smooth"
       className={`${geist.variable} ${geistMono.variable} ${readex.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
+      </head>
       <body className="min-h-dvh bg-ink-900 font-sans text-mist-100 antialiased">
         <div aria-hidden className="bg-aurora pointer-events-none fixed inset-0 -z-10" />
         <NextIntlClientProvider messages={{ Nav, Contact }}>

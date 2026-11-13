@@ -10,16 +10,20 @@ export function Contact() {
 
   return (
     <section id="contact" className="shell defer-render py-20 sm:py-28">
-      <Reveal className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:p-14">
+      <Reveal variant="zoom" className="glass relative overflow-hidden rounded-[2rem] p-6 sm:p-10 lg:p-14">
         <div
           aria-hidden
-          className="pointer-events-none absolute -end-24 -top-48 size-[34rem] rounded-full bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]"
+          className="pointer-events-none absolute -end-24 -top-48 size-[34rem] animate-breathe rounded-full bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -start-32 -bottom-56 size-[30rem] animate-breathe rounded-full bg-[radial-gradient(closest-side,rgb(171_0_5/0.14),transparent)] [animation-delay:-4.5s]"
         />
 
         <div className="relative grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <p className="inline-flex items-center gap-3 text-sm font-medium text-accent">
-              <span aria-hidden className="h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
+              <span aria-hidden className="reveal-line-x h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
               {t("eyebrow")}
             </p>
             <h2 className="mt-4 text-3xl leading-tight font-semibold text-balance text-white sm:text-4xl ltr:tracking-tight rtl:leading-snug">

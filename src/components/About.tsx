@@ -1,4 +1,4 @@
-import { Check, MapPin, Stethoscope } from "lucide-react";
+import { BriefcaseBusiness, Check, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { BrandIcon } from "@/components/BrandIcon";
 import { CountUp } from "@/components/CountUp";
@@ -15,7 +15,7 @@ export function About() {
     <section id="about" className="shell defer-render py-20 sm:py-28">
       <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
         {/* Profile card. To use a photo, swap the logo mark for <Image src={photo} … /> from src/assets. */}
-        <Reveal className="glass h-fit rounded-3xl p-6 sm:p-8 lg:sticky lg:top-28">
+        <Reveal variant="zoom" className="glass h-fit rounded-3xl p-6 sm:p-8 lg:sticky lg:top-28">
           <div className="flex items-center gap-5">
             <LogoMark className="size-20 rounded-3xl shadow-[0_16px_40px_-12px_rgb(254_12_15/0.7)]" />
             <div>
@@ -62,9 +62,9 @@ export function About() {
         </Reveal>
 
         <div>
-          <Reveal>
+          <Reveal variant="group">
             <p className="inline-flex items-center gap-3 text-sm font-medium text-accent">
-              <span aria-hidden className="h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
+              <span aria-hidden className="reveal-line-x h-px w-8 bg-linear-to-r from-accent to-accent-deep rtl:bg-linear-to-l" />
               {t("eyebrow")}
             </p>
             <h2 className="mt-4 text-3xl leading-tight font-semibold text-balance text-white sm:text-4xl ltr:tracking-tight rtl:leading-snug">
@@ -91,8 +91,8 @@ export function About() {
 
           <Reveal className="mt-6 rounded-3xl border border-accent/20 bg-accent/[0.05] p-6 sm:p-7">
             <div className="flex items-start gap-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white">
-                <Stethoscope aria-hidden className="size-5" />
+              <span className="reveal-pop grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white">
+                <BriefcaseBusiness aria-hidden className="size-5" />
               </span>
               <div>
                 <h3 className="text-lg font-semibold text-white">{t("niche.title")}</h3>

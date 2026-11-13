@@ -6,14 +6,32 @@ import type { CSSProperties, ReactNode } from "react";
  * zero hydration work. Framer Motion is reserved for the interactive pieces (hero badges, counters, menu).
  */
 
-type Props = { children: ReactNode; className?: string };
+type Props = { children?: ReactNode; className?: string };
 /** Lets list semantics survive animation: <Stagger as="ol"> + <StaggerItem as="li">. */
 type Tag = "div" | "ol" | "ul" | "li";
 
-/** Fades and lifts its content in the first time it scrolls into view. */
-export function Reveal({ children, className, delay = 0 }: Props & { delay?: number }) {
+/**
+ * How the element enters (see `[data-reveal]` in globals.css):
+ * `up` fades, rises and de-blurs · `zoom` adds a slight scale-up · `line` draws a rule from its centre ·
+ * `group` keeps the wrapper still and cascades its direct children in one after another.
+ */
+export type RevealVariant = "up" | "zoom" | "line" | "group";
+
+/** Animates its content in the first time it scrolls into view. */
+export function Reveal({
+  children,
+  className,
+  delay = 0,
+  variant = "up",
+  "aria-hidden": ariaHidden,
+}: Props & { delay?: number; variant?: RevealVariant; "aria-hidden"?: boolean }) {
   return (
-    <div data-reveal="" className={className} style={delay ? ({ "--reveal-delay": `${delay}s` } as CSSProperties) : undefined}>
+    <div
+      data-reveal={variant === "up" ? "" : variant}
+      aria-hidden={ariaHidden}
+      className={className}
+      style={delay ? ({ "--reveal-delay": `${delay}s` } as CSSProperties) : undefined}
+    >
       {children}
     </div>
   );

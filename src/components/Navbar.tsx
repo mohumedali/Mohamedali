@@ -14,12 +14,30 @@ export function Navbar() {
   const t = useTranslations("Nav");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Highlights the link of the section crossing the middle of the viewport. `top` (the hero) clears it.
+  useEffect(() => {
+    const targets = ["top", ...sections]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id === "top" ? null : entry.target.id);
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -34,7 +52,7 @@ export function Navbar() {
       <nav
         aria-label={t("primary")}
         className={cn(
-          "mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 transition-[background-color,border-color,box-shadow] duration-300 sm:px-4",
+          "intro-delay-50 mx-auto flex max-w-6xl animate-drop items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 transition-[background-color,border-color,box-shadow] duration-300 sm:px-4",
           scrolled || open ? "glass-blur" : "border-transparent",
         )}
       >
@@ -48,9 +66,15 @@ export function Navbar() {
         <ul className="hidden items-center gap-1 lg:flex">
           {sections.map((id) => (
             <li key={id}>
+              {/* Underline grows from the centre on hover and stays on the section you're reading. */}
               <a
                 href={`#${id}`}
-                className="rounded-full px-3.5 py-2 text-sm text-mist-300 transition-colors hover:bg-white/5 hover:text-white"
+                aria-current={active === id ? "true" : undefined}
+                className={cn(
+                  "relative block rounded-full px-3.5 py-2 text-sm transition-colors duration-300 hover:text-white",
+                  "after:absolute after:inset-x-3.5 after:bottom-0.5 after:h-px after:scale-x-0 after:bg-linear-to-r after:from-transparent after:via-accent after:to-transparent after:transition-transform after:duration-500 after:ease-out hover:after:scale-x-100",
+                  active === id ? "text-white after:scale-x-100" : "text-mist-300",
+                )}
               >
                 {t(id)}
               </a>

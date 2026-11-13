@@ -21,12 +21,12 @@ export function Services() {
       <Stagger className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {services.map(({ id, icon: Icon }, i) => (
           <StaggerItem key={id} className="h-full">
-            <Spotlight className="glass flex h-full flex-col rounded-3xl p-6 sm:p-7">
+            <Spotlight className="glass group flex h-full flex-col rounded-3xl p-6 sm:p-7">
               <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white shadow-[0_10px_30px_-10px_rgb(254_12_15/0.6)]">
+                <span className="grid size-12 place-items-center rounded-2xl bg-linear-to-br from-accent to-accent-deep text-white shadow-[0_10px_30px_-10px_rgb(254_12_15/0.6)] transition-[rotate,scale] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:-rotate-6">
                   <Icon aria-hidden className="size-5" />
                 </span>
-                <span aria-hidden className="font-mono text-sm text-mist-500">
+                <span aria-hidden className="font-mono text-sm text-mist-500 transition-colors duration-300 group-hover:text-accent">
                   0{i + 1}
                 </span>
               </div>

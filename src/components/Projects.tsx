@@ -5,7 +5,7 @@ import { CaseStudy } from "@/components/CaseStudy";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
-import { hostname, projects, sharedTags, type Project } from "@/lib/projects";
+import { hostname, projects, type Project } from "@/lib/projects";
 
 export function Projects() {
   const t = useTranslations("Projects");
@@ -30,33 +30,39 @@ function ProjectCard({ project }: { project: Project }) {
   const t = useTranslations("Projects");
   const name = t(`items.${project.id}.name`);
   const highlights = t.raw(`items.${project.id}.highlights`) as string[];
-  const tags = [...sharedTags.map((tag) => t(`tags.${tag}`)), t(`items.${project.id}.tag`)];
+  const tags = [...project.tags.map((tag) => t(`tags.${tag}`)), t(`items.${project.id}.tag`)];
 
   return (
     <Spotlight className="glass group h-full rounded-3xl">
       <article className="flex h-full flex-col">
         {/* Browser-framed screenshot */}
         <div className="m-2 overflow-hidden rounded-2xl border border-white/[0.06] bg-ink-950">
+          {/* The window dots pick up their traffic-light colours while the card is hovered. */}
           <div dir="ltr" className="flex items-center gap-1.5 border-b border-white/[0.06] bg-ink-850 px-3 py-2">
-            <span className="size-2 rounded-full bg-white/15" />
-            <span className="size-2 rounded-full bg-white/15" />
-            <span className="size-2 rounded-full bg-white/15" />
-            <span className="ms-2 truncate rounded-md bg-white/[0.04] px-2.5 py-0.5 font-mono text-[11px] text-mist-400">
+            <span className="size-2 rounded-full bg-white/15 transition-colors duration-300 group-hover:bg-[#ff5f57]" />
+            <span className="size-2 rounded-full bg-white/15 transition-colors duration-300 group-hover:bg-[#febc2e] group-hover:delay-75" />
+            <span className="size-2 rounded-full bg-white/15 transition-colors duration-300 group-hover:bg-[#28c840] group-hover:delay-150" />
+            <span className="ms-2 truncate rounded-md bg-white/[0.04] px-2.5 py-0.5 font-mono text-[11px] text-mist-400 transition-colors duration-300 group-hover:text-mist-200">
               {hostname(project.url)}
             </span>
           </div>
-          <div className="relative aspect-[16/10] overflow-hidden">
-            <Image
-              src={project.image}
-              alt={t("screenshotAlt", { name })}
-              fill
-              sizes="(min-width: 1216px) 576px, (min-width: 768px) 46vw, calc(100vw - 3rem)"
-              placeholder="blur"
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-            />
+          <div className="reveal-media relative aspect-[16/10] overflow-hidden">
+            <div className="reveal-media-zoom absolute inset-0">
+              <Image
+                src={project.image}
+                alt={t("screenshotAlt", { name })}
+                fill
+                sizes="(min-width: 1216px) 576px, (min-width: 768px) 46vw, calc(100vw - 3rem)"
+                placeholder="blur"
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+            </div>
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-ink-950/60 via-transparent to-transparent" />
             <span className="absolute start-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-ink-950/80 px-2.5 py-1 text-xs font-medium text-success ring-1 ring-success/30">
-              <span aria-hidden className="size-1.5 rounded-full bg-success" />
+              <span aria-hidden className="relative flex size-1.5">
+                <span className="absolute inset-0 animate-ping-soft rounded-full bg-success" />
+                <span className="relative size-1.5 rounded-full bg-success" />
+              </span>
               {t("liveBadge")}
             </span>
           </div>

@@ -1,6 +1,14 @@
 "use client";
 
-import { m, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
+import {
+  m,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 import Image from "next/image";
 import type { PointerEvent } from "react";
 import portrait from "@/assets/mohamed-ali.webp";
@@ -33,7 +41,8 @@ const badges: Badge[] = [
   { icon: "tailwind", label: "Tailwind CSS", color: "#38bdf8", position: "xl:top-92 xl:-start-24", depth: 20, phase: "-1s" },
 ];
 
-const ease = [0.22, 1, 0.36, 1] as const;
+/** Entrance delays are CSS and counted from the end of the opening intro (`--intro-offset`, zero when it doesn't play). */
+const afterIntro = (seconds: number) => `calc(var(--intro-offset, 0s) + ${seconds}s)`;
 
 type Props = { portraitAlt: string; stackLabel: string; auditLabel: string; scores: string[] };
 
@@ -43,8 +52,17 @@ export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Prop
   const x = useSpring(pointerX, { stiffness: 120, damping: 18, mass: 0.4 });
   const y = useSpring(pointerY, { stiffness: 120, damping: 18, mass: 0.4 });
 
+  // The portrait tilts toward the cursor, with a soft glare that follows it across the photo.
+  const reduceMotion = useReducedMotion();
+  const rotateX = useTransform(y, (v) => v * -10);
+  const rotateY = useTransform(x, (v) => v * 10);
+  const glareX = useTransform(x, (v) => `${(v + 0.5) * 100}%`);
+  const glareY = useTransform(y, (v) => `${(v + 0.5) * 100}%`);
+  const glare = useMotionTemplate`radial-gradient(22rem circle at ${glareX} ${glareY}, rgb(255 255 255 / 0.16), transparent 60%)`;
+
   function onPointerMove(event: PointerEvent<HTMLDivElement>) {
-    if (event.pointerType !== "mouse") return;
+    // Gated here rather than in render, so server and client markup always match.
+    if (event.pointerType !== "mouse" || reduceMotion) return;
     const rect = event.currentTarget.getBoundingClientRect();
     pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
     pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
@@ -63,7 +81,8 @@ export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Prop
           className="pointer-events-none absolute -inset-16 -z-10 bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]"
         />
 
-        {/* `lift` moves without fading: the portrait can be the LCP element, so it must be visible from its first paint. */}
+        {/* `lift` moves without fading: the portrait can be the LCP element, so it must be visible from its first paint.
+            No intro offset here for the same reason: a delayed animation would hold back LCP (see Hero.tsx). */}
         <div className="relative isolate animate-lift [animation-delay:150ms]">
           <div
             aria-hidden
@@ -75,7 +94,10 @@ export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Prop
           />
 
           {/* Ring = 3px of padding showing the frame's own accent gradient, with the orbiting beam layered over it. */}
-          <div className="group relative overflow-hidden rounded-[2rem] bg-linear-to-br from-accent to-accent-deep p-[3px] shadow-[0_28px_80px_-30px_rgb(254_12_15/0.65)]">
+          <m.div
+            style={{ rotateX, rotateY, transformPerspective: 1000 }}
+            className="group relative overflow-hidden rounded-[2rem] bg-linear-to-br from-accent to-accent-deep p-[3px] shadow-[0_28px_80px_-30px_rgb(254_12_15/0.65)]"
+          >
             <div
               aria-hidden
               className="frame-beam pointer-events-none absolute top-1/2 left-1/2 aspect-square w-[200%] -translate-x-1/2 -translate-y-1/2 animate-orbit"
@@ -94,16 +116,17 @@ export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Prop
                 aria-hidden
                 className="pointer-events-none absolute inset-0 rounded-[inherit] bg-linear-to-t from-ink-950/75 via-transparent to-transparent shadow-[inset_0_0_0_1px_rgb(255_255_255/0.08)]"
               />
+              <m.div
+                aria-hidden
+                style={{ backgroundImage: glare }}
+                className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 mix-blend-soft-light transition-opacity duration-500 group-hover:opacity-100 motion-reduce:hidden"
+              />
             </div>
-          </div>
+          </m.div>
         </div>
 
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease, delay: 0.35 }}
-          className="glass-blur @container relative z-10 mx-3 -mt-16 rounded-2xl px-4 py-4 sm:mx-6 sm:px-5"
-        >
+        {/* CSS entrance (not Framer): it starts on first paint instead of after hydration. `enter` has no blur — this card already uses backdrop-filter. */}
+        <div className="glass-blur intro-delay-350 @container relative z-10 mx-3 -mt-16 animate-enter rounded-2xl px-4 py-4 sm:mx-6 sm:px-5">
           <p className="text-xs font-medium text-mist-400">{auditLabel}</p>
           <ul className="mt-3 grid grid-cols-4 gap-1 sm:gap-2">
             {scores.map((label, i) => (
@@ -112,7 +135,7 @@ export function HeroVisual({ portraitAlt, stackLabel, auditLabel, scores }: Prop
               </li>
             ))}
           </ul>
-        </m.div>
+        </div>
 
         <ul aria-label={stackLabel} className="mt-6 flex flex-wrap justify-center gap-2.5 xl:mt-0">
           {badges.map((badge, i) => (
@@ -130,12 +153,10 @@ function FloatingBadge({ badge, index, x, y }: { badge: Badge; index: number; x:
 
   return (
     // Three layers so each transform owns one element: parallax (li) → CSS float loop (span) → hover scale (m.span).
+    // The entrance (`pop`) animates the separate `scale` property, so it composes with Framer's parallax transform.
     <m.li
-      style={{ x: tx, y: ty }}
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease, delay: 0.45 + index * 0.08 }}
-      className={cn("xl:absolute xl:z-20", badge.position)}
+      style={{ x: tx, y: ty, animationDelay: afterIntro(0.45 + index * 0.08) }}
+      className={cn("animate-pop xl:absolute xl:z-20", badge.position)}
     >
       <span className="block animate-float" style={{ animationDelay: badge.phase }}>
         <m.span
@@ -170,7 +191,7 @@ function Gauge({ label, delay }: { label: string; delay: number }) {
             pathLength={100}
             strokeDasharray="100"
             className="animate-gauge"
-            style={{ animationDelay: `${delay}s` }}
+            style={{ animationDelay: afterIntro(delay) }}
           />
         </svg>
         <span className="absolute inset-0 grid place-items-center font-mono text-sm font-semibold text-accent">100</span>

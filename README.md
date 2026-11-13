@@ -45,13 +45,15 @@ src/app/globals.css           Design tokens, glass utilities, buttons, reveal + 
 - **Testimonials** (`Testimonials.items` in both message files) are drafts written in each client's voice. Send each client their quote and get approval before going live.
 - **Project case studies** (`Projects.items.*.caseStudy`) describe the build; adjust anything that doesn't match what was actually shipped.
 - **FAQ** answers (the timeline answer deliberately gives no fixed duration) and the **About** commitments (ownership, support, preview links) are promises — edit them to match how you actually work.
-- **Project links**: Dr. Mohamed Samy and Top Power use their real domains; Dr. Sameh Kasem and Dr. Mahmoud Hassaan still point to `*.vercel.app` preview domains — swap those in `src/lib/projects.ts` once they're live.
+- **Project links**: Dr. Mohamed Samy, Indigo Interiors and Top Power use their real domains; Dr. Sameh Kasem still points to a `*.vercel.app` preview domain — swap it in `src/lib/projects.ts` once it's live.
+- **Indigo Interiors** has no testimonial yet. Once the client approves a quote, add `Testimonials.items.indigo` to both message files and `"indigo"` to `quoted` in `src/components/Testimonials.tsx`.
 
 ## Adding a project
 
 1. Drop a 1280×800 WebP screenshot in `src/assets/projects/`.
-2. Add an entry to `src/lib/projects.ts` (and its id to `ProjectId`).
-3. Add `Projects.items.<id>` and `Testimonials.items.<id>` to both message files.
+2. Add an entry to `src/lib/projects.ts` (and its id to `ProjectId`), listing the tech tags that really apply to it.
+3. Add `Projects.items.<id>` to both message files.
+4. Optional: add `Testimonials.items.<id>` to both message files and the id to `quoted` in `src/components/Testimonials.tsx`.
 
 ## Performance notes
 

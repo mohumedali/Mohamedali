@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import type { ReactNode } from "react";
 import { CountUp } from "@/components/CountUp";
-import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/site";
 
@@ -36,11 +36,13 @@ export function MetricsBar() {
 
   return (
     <section aria-label={t("label")} className="shell">
-      <Reveal className="glass grid grid-cols-2 overflow-hidden rounded-3xl lg:grid-cols-4">
+      {/* The panel is there from the start; its four cells cascade in. */}
+      <Stagger className="glass grid grid-cols-2 overflow-hidden rounded-3xl lg:grid-cols-4" stagger={0.1}>
         {items.map((item, i) => (
-          <div
+          <StaggerItem
             key={item.key}
             className={cn(
+              // No transition utilities here: they would replace the reveal transition on this element.
               "border-white/[0.07] p-5 sm:p-8",
               // 2×2 grid on mobile, single row on desktop
               i % 2 === 0 && "border-e",
@@ -52,9 +54,9 @@ export function MetricsBar() {
             <p className="text-gradient text-2xl font-semibold sm:text-3xl lg:text-4xl">{item.value}</p>
             <p className="mt-3 text-sm font-medium text-white sm:text-base">{item.label}</p>
             <p className="mt-1 text-xs leading-relaxed text-mist-400 sm:text-sm">{item.detail}</p>
-          </div>
+          </StaggerItem>
         ))}
-      </Reveal>
+      </Stagger>
     </section>
   );
 }

@@ -1,6 +1,6 @@
 import { ArrowLeftRight, Boxes, Braces, Database, Gauge, Globe, MonitorSmartphone, Server } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Fragment } from "react";
+import { Fragment, type CSSProperties } from "react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { Spotlight } from "@/components/motion/Spotlight";
@@ -28,9 +28,9 @@ export function Skills() {
       <Stagger className="mt-14 grid gap-5 md:grid-cols-2">
         {groups.map(({ id, icon: Icon }) => (
           <StaggerItem key={id} className="h-full">
-            <Spotlight className="glass h-full rounded-3xl p-6 sm:p-8">
+            <Spotlight className="glass group h-full rounded-3xl p-6 sm:p-8">
               <div className="flex items-start gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent/20 to-accent-deep/5 text-accent ring-1 ring-accent/25">
+                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent/20 to-accent-deep/5 text-accent ring-1 ring-accent/25 transition-[rotate,scale] duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110 group-hover:rotate-6">
                   <Icon aria-hidden className="size-5" />
                 </span>
                 <div>
@@ -39,11 +39,12 @@ export function Skills() {
                 </div>
               </div>
               <ul className="mt-6 flex flex-wrap gap-2">
-                {(t.raw(`groups.${id}.items`) as string[]).map((item) => (
+                {(t.raw(`groups.${id}.items`) as string[]).map((item, i) => (
                   <li
                     key={item}
                     dir="auto"
-                    className="rounded-lg border border-white/[0.08] bg-ink-850/60 px-3 py-1.5 text-sm text-mist-200"
+                    style={{ "--i": i } as CSSProperties}
+                    className="reveal-chip rounded-lg border border-white/[0.08] bg-ink-850/60 px-3 py-1.5 text-sm text-mist-200"
                   >
                     {item}
                   </li>

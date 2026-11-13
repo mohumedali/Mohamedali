@@ -13,12 +13,28 @@ export function Hero() {
   return (
     // overflow-x-clip: the visual's glow and badges bleed past the edges by design, but must never cause sideways scroll on phones.
     <section id="top" className="relative overflow-x-clip pt-32 pb-16 sm:pt-40 lg:pb-24">
-      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 -z-10" />
+      {/* Two slow-drifting glows behind everything. Radial fades end inside each box, so no hard edges show. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-48 start-[-10%] size-[36rem] animate-drift rounded-full bg-[radial-gradient(closest-side,rgb(254_12_15/0.16),transparent)]" />
+        <div className="absolute top-24 end-[-14%] size-[42rem] animate-drift rounded-full bg-[radial-gradient(closest-side,rgb(171_0_5/0.2),transparent)] [animation-delay:-11s] [animation-duration:26s]" />
+      </div>
+
+      {/* Light beams that run along the grid lines (multiples of the 56px tile); the grid's mask fades them at the edges. */}
+      <div aria-hidden className="bg-grid pointer-events-none absolute inset-0 -z-10 motion-reduce:[&>*]:hidden">
+        <span className="absolute top-[168px] left-0 h-px w-48 animate-beam-x bg-linear-to-r from-transparent via-accent to-transparent" />
+        <span className="absolute top-[392px] left-0 h-px w-40 animate-beam-x bg-linear-to-r from-transparent via-[#ff8a8c] to-transparent [animation-delay:-4.5s] [animation-duration:11s]" />
+        <span className="absolute top-0 left-[280px] h-48 w-px animate-beam-y bg-linear-to-b from-transparent via-accent to-transparent [animation-delay:-2s]" />
+        <span className="absolute top-0 left-[1064px] h-40 w-px animate-beam-y bg-linear-to-b from-transparent via-[#ff8a8c] to-transparent [animation-delay:-7s] [animation-duration:13s]" />
+      </div>
 
       {/* grid-cols-1 = minmax(0,1fr): otherwise a child's min-content width could set a track wider than small phones. */}
       <div className="shell grid grid-cols-1 items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
         <div>
-          <p className="inline-flex animate-rise items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent sm:text-sm">
+          {/* intro-delay-*: entrance delays counted from the end of the opening intro (zero when it doesn't play).
+              Never on the headline, subtitle or portrait: Chrome doesn't count an element as painted while its animation
+              is still in its delay, so delaying them would push FCP/LCP back by the intro's length (measured: ~0.8s).
+              They animate under the curtain from the first paint, and the split itself is their reveal. */}
+          <p className="intro-delay-0 inline-flex animate-rise items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent sm:text-sm">
             <span className="relative flex size-2">
               <span className="absolute inset-0 animate-ping-soft rounded-full bg-success" />
               <span className="relative size-2 rounded-full bg-success" />
@@ -29,7 +45,7 @@ export function Hero() {
           {/* Fluid below ~384px: the nowrap highlight ("high-performance,") must still fit a 320px phone. */}
           <h1 className="mt-6 animate-lift text-[length:clamp(2rem,10vw,2.4rem)] leading-[1.1] font-semibold text-balance text-white sm:text-5xl lg:text-[3.5rem] ltr:tracking-tight rtl:leading-[1.35]">
             {t.rich("title", {
-              hl: (chunks) => <span className="text-gradient whitespace-nowrap">{chunks}</span>,
+              hl: (chunks) => <span className="text-shine whitespace-nowrap">{chunks}</span>,
               nb: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
             })}
           </h1>
@@ -38,7 +54,7 @@ export function Hero() {
             {t("subtitle")}
           </p>
 
-          <div className="mt-9 flex animate-rise flex-wrap items-center gap-3 [animation-delay:220ms]">
+          <div className="intro-delay-220 mt-9 flex animate-rise flex-wrap items-center gap-3">
             <a href="#contact" className="btn btn-primary">
               {t("ctaPrimary")}
               <ArrowUpRight aria-hidden className="size-4 rtl:-scale-x-100" />
@@ -52,7 +68,7 @@ export function Hero() {
             href={whatsappLink(wa("message"))}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex animate-rise items-center gap-3 text-sm text-mist-300 transition-colors [animation-delay:300ms] hover:text-white sm:gap-2"
+            className="intro-delay-300 mt-6 inline-flex animate-rise items-center gap-3 text-sm text-mist-300 transition-colors hover:text-white sm:gap-2"
           >
             {/* Phones: icon chip beside a label-over-number stack. From `sm` it collapses back to a single inline line. */}
             <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#25d366]/10 ring-1 ring-[#25d366]/25 sm:size-auto sm:bg-transparent sm:ring-0">

@@ -2,13 +2,13 @@
   "Meta": {
     "name": "Mohamed Ali",
     "title": "Mohamed Ali — Senior Full-Stack Engineer | Next.js & ASP.NET Core",
-    "description": "Senior Full-Stack Engineer (Next.js & ASP.NET Core) based in Egypt. 20+ professional, SEO-driven, Arabic-first websites delivered for doctors and businesses — each with a dashboard you can edit yourself.",
+    "description": "Senior Full-Stack Engineer (Next.js & ASP.NET Core) based in Egypt. 20+ professional, SEO-driven websites delivered across many industries — from clinics and design studios to companies and suppliers.",
     "keywords": [
       "Full-Stack Developer",
       "Next.js Developer",
       "ASP.NET Core Developer",
       "Website developer Egypt",
-      "Doctor website design",
+      "Business website design",
       "Supabase",
       "Technical SEO",
       "Core Web Vitals",
@@ -43,7 +43,7 @@
   "Hero": {
     "available": "Available for new projects",
     "title": "Building <hl>high-performance</hl>, <nb>SEO-driven</nb> <nb>full-stack</nb> web apps that scale.",
-    "subtitle": "I'm Mohamed Ali, a Senior Full-Stack Engineer (.NET & Next.js) based in Egypt. I've delivered 20+ websites for doctors and businesses — professional, Arabic-first sites that show up on Google, come with a dashboard you edit yourself, and turn visitors into bookings and clients.",
+    "subtitle": "I'm Mohamed Ali, a Senior Full-Stack Engineer (.NET & Next.js) based in Egypt. I've delivered 20+ websites across many industries — clinics, design studios, companies and suppliers — professional sites that show up on Google, are easy to manage, and turn visitors into clients.",
     "ctaPrimary": "Start a project",
     "ctaSecondary": "View projects",
     "whatsapp": "Or message me directly on WhatsApp",
@@ -70,7 +70,7 @@
     },
     "projects": {
       "label": "Websites delivered",
-      "detail": "For doctors, clinics and businesses"
+      "detail": "Across medical, design, industrial & corporate"
     },
     "i18n": {
       "value": "AR ⇄ EN",
@@ -78,10 +78,13 @@
       "detail": "Arabic-first RTL with seamless LTR"
     }
   },
+  "Marquee": {
+    "items": ["SEO-driven", "Lightning fast", "Arabic & English", "Mobile-first", "Built to convert", "Easy to manage"]
+  },
   "Projects": {
     "eyebrow": "Selected work",
     "title": "Production sites built to rank — and to convert",
-    "subtitle": "Live client sites, each with a Supabase-powered dashboard and a complete technical SEO setup.",
+    "subtitle": "Live client sites from different industries — each built to load fast, rank on Google and turn visitors into clients.",
     "liveBadge": "Live site",
     "caseStudy": "How it was built",
     "tagsLabel": "Tech & features",
@@ -119,17 +122,17 @@
         "caseStudy": "Articles and medical cases are managed in Supabase and published as statically rendered pages, each with its own metadata and Article structured data. The video gallery and one-tap WhatsApp routing keep patients a single tap away from the clinic.",
         "tag": "Video gallery"
       },
-      "mahmoudHassaan": {
-        "name": "Dr. Mahmoud Hassaan",
-        "category": "Surgical oncology · Landing experience",
-        "summary": "A high-conversion landing experience for a surgical oncology consultant, with a calm glassmorphism UI that builds trust from the first scroll.",
+      "indigo": {
+        "name": "Indigo Interiors",
+        "category": "Interior design & fit-out · Studio website",
+        "summary": "An elegant showcase for an interior architecture and turnkey fit-out studio working across Abu Dhabi and Cairo — the projects speak first.",
         "highlights": [
-          "Conversion-focused layout with persistent booking CTAs",
-          "Custom glassmorphism UI design",
-          "Statically generated, search-ready pages"
+          "Full-screen hero slider with immersive project imagery",
+          "Project portfolio and design blog, each with its own pages",
+          "Consultation requests routed straight to WhatsApp and phone"
         ],
-        "caseStudy": "Every page is generated at build time and served from Vercel's edge network. The glass effects are pure CSS with no runtime UI library, fonts are self-hosted through next/font, and content updates flow in from Supabase.",
-        "tag": "Static generation"
+        "caseStudy": "Built on Next.js and Supabase, with every page — projects, services and blog articles — pre-rendered as static HTML and LocalBusiness structured data, so the studio's work loads fast and is easy for Google to understand.",
+        "tag": "Project portfolio"
       },
       "topPower": {
         "name": "Top Power",
@@ -148,7 +151,7 @@
   "Testimonials": {
     "eyebrow": "Client feedback",
     "title": "What clients say after launch",
-    "subtitle": "Doctors and business owners I've built for — every quote links to the live project.",
+    "subtitle": "Clients I've built for across different industries — every quote links to the live project.",
     "viewProject": "View their website",
     "items": {
       "samehKasem": {
@@ -160,11 +163,6 @@
         "quote": "I had a lot of videos and articles and needed one organised place to present them. Now we add articles and cases ourselves from the dashboard, and the WhatsApp button made it much easier for patients to contact the clinic.",
         "name": "Dr. Mohamed Samy",
         "role": "Consultant in gastroenterology, endoscopy & hepatology"
-      },
-      "mahmoudHassaan": {
-        "quote": "I wanted a site that gives patients and their families a sense of calm and trust, and that's exactly what I got. The design is elegant, and communication was clear and organised from the first day until delivery.",
-        "name": "Dr. Mahmoud Hassaan",
-        "role": "Consultant surgical oncologist"
       },
       "topPower": {
         "quote": "We needed a platform that presents our fire-fighting products professionally and brings in clients. Mohamed delivered a strong, professional website, and we update the catalog and blog ourselves from the dashboard without any hassle.",
@@ -263,13 +261,13 @@
       "Dashboard training and support after launch"
     ],
     "niche": {
-      "title": "Specialised in websites for doctors & clinics",
-      "description": "Three of the four featured projects are for consultant doctors — I know what patients look for before they book.",
+      "title": "Experience across every kind of business",
+      "description": "Doctors and clinics, interior design studios, engineering suppliers and companies — each industry has its own clients, and I build around what yours look for before they reach out.",
       "points": [
-        "Appointment booking and direct WhatsApp routing",
-        "Patient reviews and cases managed from the dashboard",
-        "Medical articles that bring in Google traffic",
-        "Video galleries and patient education content"
+        "Clinics & doctors: bookings, reviews and medical content",
+        "Studios & creative brands: portfolios that sell the work",
+        "Companies & suppliers: product catalogs and lead capture",
+        "Any business: WhatsApp routing and content that ranks"
       ]
     }
   },
