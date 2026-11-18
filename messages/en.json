@@ -92,26 +92,13 @@
   "Projects": {
     "eyebrow": "Selected work",
     "title": "Engineering depth, proven in production",
-    "subtitle": "Live client sites built to rank and convert, followed by backend, payment and machine-learning case studies — with source code where it's public.",
-    "groups": {
-      "engineering": {
-        "title": "Engineering case studies",
-        "description": "APIs, payment security and ML, broken down layer by layer."
-      },
-      "client": {
-        "title": "Production client sites",
-        "description": "Live websites that real businesses run on, each with its technical breakdown."
-      }
-    },
+    "subtitle": "Live websites that real businesses run on, built to rank and convert — each with a breakdown of how it was built.",
     "liveBadge": "Live site",
     "caseStudy": "How it was built",
     "tagsLabel": "Tech & features",
     "live": "Live preview",
     "liveLabel": "Live preview: {name} (opens in a new tab)",
-    "source": "Source code",
-    "sourceLabel": "Source code: {name} on GitHub (opens in a new tab)",
     "privateClient": "Private repo · client-owned code",
-    "privateRequest": "Private repo · code walkthrough on request",
     "screenshotAlt": "Homepage of the {name} website",
     "tags": {
       "appRouter": "Next.js App Router",
@@ -120,86 +107,6 @@
       "rtl": "Arabic RTL/LTR"
     },
     "items": {
-      "ecommerceApi": {
-        "name": "E-Commerce REST API",
-        "category": "Backend · ASP.NET Core Web API",
-        "summary": "A layered e-commerce backend with JWT authentication, role-based authorization, a product catalog and a cart — documented end to end in Swagger.",
-        "highlights": [
-          "JWT authentication with Admin / User roles securing 10+ endpoints",
-          "Clean Architecture: Controller → Service → Repository",
-          "Product CRUD with pagination and search / filter by name and category",
-          "Cart module: add items, update quantities and remove — 3 dedicated endpoints",
-          "Swagger / OpenAPI docs with Bearer-token support"
-        ],
-        "caseStudy": "Controllers stay thin and hand each request to a service, which holds the business rules and reaches the data through repository interfaces. Entity Framework Core (Code First migrations) maps the domain to SQL Server, and admin-only operations sit behind role-based authorization. Swagger documents every endpoint and accepts a Bearer token, so the whole API can be explored without a frontend.",
-        "flowTitle": "Request flow",
-        "flow": [
-          { "title": "Controllers", "detail": "Routing, JWT auth and role policies" },
-          { "title": "Services", "detail": "Business logic" },
-          { "title": "Repositories", "detail": "Data access behind interfaces" },
-          { "title": "EF Core → SQL Server", "detail": "Code First migrations" }
-        ]
-      },
-      "paymob": {
-        "name": "Paymob Payment Integration",
-        "category": "FinTech · Payment gateway",
-        "summary": "A complete card-payment flow on Paymob: payment sessions created on the server, signed webhooks, and a result page that can't be faked.",
-        "highlights": [
-          "Payment sessions created on the server — API keys never reach the browser",
-          "HMAC-SHA512 verification of every webhook and redirect, compared in constant time",
-          "The webhook is the source of truth: a forged ?success=true URL shows “verification failed”",
-          "Duplicate deliveries are safe: results are keyed per order, and a late callback can't overwrite a successful payment",
-          "Two flows from one codebase: an embedded card iframe or Paymob Unified Checkout"
-        ],
-        "caseStudy": "Built with Next.js Route Handlers and strict TypeScript types for every Paymob payload. The checkout endpoint authenticates with Paymob, registers the order and issues a payment key from server-only modules, with request timeouts and typed errors. When Paymob calls the webhook, the handler rebuilds the 20 signed fields, computes HMAC-SHA512 and compares it in constant time before recording anything — and answers 500 on failure so Paymob retries. The checkout page polls a status endpoint fed only by verified results, so the customer always lands on the right success or failure screen.",
-        "flowTitle": "Payment flow",
-        "flow": [
-          { "title": "Checkout API", "detail": "Order and payment key, server-side" },
-          { "title": "Card iframe", "detail": "Card data stays with Paymob" },
-          { "title": "Webhook", "detail": "HMAC-SHA512, constant-time check" },
-          { "title": "Status page", "detail": "Shows verified results only" }
-        ]
-      },
-      "lms": {
-        "name": "Learning Management System",
-        "category": "Team project · ASP.NET Core MVC",
-        "summary": "A full-featured LMS built as the DEPI graduation project: courses, instructors, enrollments and three user roles on a clean three-layer architecture.",
-        "highlights": [
-          "Three-layer architecture: Presentation, Business Logic (BLL) and Data Access (DAL)",
-          "ASP.NET Core Identity with Admin, Instructor and Student roles",
-          "Admin dashboard with statistics on courses, categories, instructors and enrollments",
-          "Course search and filtering, enrollment management and student profiles",
-          "Repository pattern, service layer and dependency injection throughout"
-        ],
-        "caseStudy": "Built as a team for the Digital Egypt Pioneers Initiative (DEPI). The MVC layer only renders views and calls services; the BLL owns the course and enrollment rules; the DAL wraps Entity Framework Core in repositories over SQL Server. Every layer is wired through ASP.NET Core's dependency injection, and ASP.NET Core Identity handles registration, sign-in and role-based authorization for all three roles.",
-        "flowTitle": "Layers",
-        "flow": [
-          { "title": "Presentation", "detail": "MVC, Razor views, Bootstrap 5" },
-          { "title": "BLL", "detail": "Services and course rules" },
-          { "title": "DAL", "detail": "Repositories over EF Core" },
-          { "title": "SQL Server + Identity", "detail": "Three roles, role-based access" }
-        ]
-      },
-      "churn": {
-        "name": "Customer Churn Prediction",
-        "category": "Machine learning · Python",
-        "summary": "A model that flags the customers most likely to cancel, so a retention team knows exactly who to call first.",
-        "highlights": [
-          "80.3% accuracy and 0.848 ROC-AUC on a held-out test set (baseline: 73.5%)",
-          "The riskiest 20% of customers contain 51% of all churners — about 2.5× better than random",
-          "Soft-voting ensemble of CatBoost, XGBoost and Logistic Regression",
-          "Five model families tuned with Optuna on 5-fold stratified cross-validation",
-          "A scoring CLI that outputs a churn probability and risk tier for each customer"
-        ],
-        "caseStudy": "Trained on the public IBM Telco dataset (7,043 customers). A stratified 20% test set is locked away and used exactly once, at the end, so the reported numbers are an honest estimate. Feature engineering — service counts, average spend, a price-change signal — lives inside the scikit-learn pipeline, so nothing leaks between folds and the same code runs at prediction time. The saved pipeline scores new customers from a CSV and sorts them by risk.",
-        "flowTitle": "ML pipeline",
-        "flow": [
-          { "title": "Feature pipeline", "detail": "Cleaning and engineered features" },
-          { "title": "Model search", "detail": "5 models, Optuna, 5-fold CV" },
-          { "title": "Ensemble", "detail": "CatBoost + XGBoost + LogReg" },
-          { "title": "predict.py", "detail": "Churn probability and risk tier" }
-        ]
-      },
       "samehKasem": {
         "name": "Dr. Sameh Kasem",
         "category": "Neurosurgery · Medical portal",
@@ -223,6 +130,21 @@
         ],
         "caseStudy": "Articles and medical cases are managed in Supabase and published as statically rendered pages, each with its own metadata and Article structured data. The video gallery and one-tap WhatsApp routing keep patients a single tap away from the clinic.",
         "tag": "Video gallery"
+      },
+      "ahmedShoulah": {
+        "name": "Dr. Ahmed Shoulah",
+        "category": "Plastic, reconstructive & hand surgery · Medical platform",
+        "summary": "A bilingual platform for a professor of plastic, reconstructive and hand surgery who operates across six clinics and hospitals — built to turn every visit into a booking request.",
+        "highlights": [
+          "Booking request form: request type, specialty, preferred clinic and a description of the case",
+          "Weekly schedule across six clinics and hospitals, from Heliopolis to Benha",
+          "Four specialties and 16 procedures, each with its own section",
+          "Video library, medical articles and patient reviews",
+          "Admin dashboard to manage all the content — no developer needed",
+          "WhatsApp with a pre-written message, one-tap calling and social links"
+        ],
+        "caseStudy": "Built on Next.js with next-intl: the Arabic and English sites are pre-rendered as static HTML and served from Vercel's edge cache, with hreflang alternates and localized metadata. Services, videos, articles and reviews are managed from an admin dashboard backed by Supabase, with images served from Supabase Storage. Physician, MedicalClinic, MedicalProcedure and FAQPage structured data help Google show the doctor, every clinic location and each procedure in search.",
+        "tag": "Multi-clinic booking"
       },
       "indigo": {
         "name": "Indigo Interiors",
